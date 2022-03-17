@@ -1,20 +1,17 @@
-package com.qaprosoft.carina.myfitnesspal.android;
+package com.qaprosoft.carina.myfp.android;
 
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.myfitnesspal.common.LoginPageBaseMyFitnessPal;
-import com.qaprosoft.carina.myfitnesspal.common.StartPageBaseMyFitnessPal;
-import com.qaprosoft.carina.myfitnesspal.utils.IConstantsMyFitnessPal;
+import com.qaprosoft.carina.myfp.common.LoginPageBase;
+import com.qaprosoft.carina.myfp.common.StartPageBase;
+import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBaseMyFitnessPal.class)
-public class LoginPageMyFitnessPal extends LoginPageBaseMyFitnessPal implements IMobileUtils, IConstantsMyFitnessPal {
-
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='LoginActivity']/android.widget.LinearLayout/android.view.ViewGroup/android.widget.ImageButton")
-    private ExtendedWebElement backBtn;
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
+public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConstants {
 
     @FindBy(id = "com.myfitnesspal.android:id/email_address_edit")
     private ExtendedWebElement emailField;
@@ -31,37 +28,34 @@ public class LoginPageMyFitnessPal extends LoginPageBaseMyFitnessPal implements 
     @FindBy(id = "com.myfitnesspal.android:id/facebook_button")
     private ExtendedWebElement facebookBtn;
 
-
-    public LoginPageMyFitnessPal(WebDriver driver) {
+    public LoginPage(WebDriver driver) {
         super(driver);
     }
+
     @Override
     public boolean isEmailFieldPresent() {
-        return emailField.isElementPresent(FIVE_SECONDS);
+        return emailField.isElementPresent(THREE_SECONDS);
     }
-    @Override
-    public boolean isBackBtnPresent() {
-        return backBtn.isElementPresent(FIVE_SECONDS);
-    }
+
     @Override
     public boolean isPasswordFieldPresent() {
-        return passwordInputField.isElementPresent(FIVE_SECONDS);
+        return passwordInputField.isElementPresent(THREE_SECONDS);
     }
 
     @Override
-    public boolean isForgotPasswordBtnPresent() {
-        return forgotPasswordBtn.isElementPresent(FIVE_SECONDS);
+    public boolean isForgotPasswordButtonPresent() {
+        return forgotPasswordBtn.isElementPresent(THREE_SECONDS);
     }
 
     @Override
-    public boolean isFacebookBtnPresent() {
-        return facebookBtn.isElementPresent(FIVE_SECONDS);
-    }
-    @Override
-    public boolean isLoginBtnPresent() {
-        return loginBtn.isElementPresent(FIVE_SECONDS);
+    public boolean isFacebookButtonPresent() {
+        return facebookBtn.isElementPresent(THREE_SECONDS);
     }
 
+    @Override
+    public boolean isLoginButtonPresent() {
+        return loginBtn.isElementPresent(THREE_SECONDS);
+    }
 
     @Override
     public void typeEmailAddress(String name) {
@@ -75,36 +69,33 @@ public class LoginPageMyFitnessPal extends LoginPageBaseMyFitnessPal implements 
     }
 
     @Override
-    public boolean isLoginBtnActive() {
+    public boolean isLoginButtonActive() {
         return false;
     }
 
     @Override
     public boolean isPageOpened() {
-        return loginBtn.isElementPresent(FIVE_SECONDS);
+        return loginBtn.isElementPresent(THREE_SECONDS);
     }
 
     @Override
-    public StartPageBaseMyFitnessPal clickLogInBtn() {
-         loginBtn.click(FIVE_SECONDS);
-        return initPage(getDriver(), StartPageBaseMyFitnessPal.class);
-    }
-    @Override
-    public void clickOnBackBtn() {
-        backBtn.click(FIVE_SECONDS);
-
+    public StartPageBase clickLogInButton() {
+        loginBtn.click(THREE_SECONDS);
+        return initPage(getDriver(), StartPageBase.class);
     }
 
     @Override
-    public boolean isEmailAddressFieldBelowPasswordField(){
-        return emailField.getLocation().getY()<passwordInputField.getLocation().getY();
+    public boolean isEmailAddressFieldBelowPasswordField() {
+        return emailField.getLocation().getY() < passwordInputField.getLocation().getY();
     }
+
     @Override
     public boolean isPasswordFieldBelowLoginBtn() {
-        return passwordInputField.getLocation().getY()<loginBtn.getLocation().getY();
+        return passwordInputField.getLocation().getY() < loginBtn.getLocation().getY();
     }
+
     @Override
-    public String getEmailAddressFieldText (){
+    public String getEmailAddressFieldText() {
         return emailField.getText();
     }
 
@@ -112,20 +103,23 @@ public class LoginPageMyFitnessPal extends LoginPageBaseMyFitnessPal implements 
     public String getPasswordFieldText() {
         return passwordInputField.getText();
     }
+
     @Override
     public String getLogInText() {
         return loginBtn.getText();
     }
+
     @Override
     public String getForgotPasswordBtnText() {
         return forgotPasswordBtn.getText();
     }
+
     @Override
     public String getFacebookBtnText() {
         return facebookBtn.getText();
     }
 
-    }
+}
 
 
 
