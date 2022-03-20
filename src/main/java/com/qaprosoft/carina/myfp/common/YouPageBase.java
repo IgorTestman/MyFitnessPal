@@ -16,7 +16,7 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract boolean isCountrySelected(String country);
 
-    public abstract void typeAge(int date);
+    public abstract void typeAge(String age);
 
     public abstract void clickOnNextButton();
 
@@ -26,13 +26,13 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void clickOnWeightButton();
 
-    public abstract void typeFirstHeight(int value);
+    public abstract void typeFirstHeight(String firstValue);
 
-    public abstract void typeSecondHeight(int value);
+    public abstract void typeSecondHeight(String secondValue);
 
     public abstract void clickOnSetButton();
 
-    public abstract void typeWeight(int value);
+    public abstract void typeWeight(String value);
 
     public abstract AbstractPage selectHeightUnitFromDropdown(YouPage height);
 
@@ -46,7 +46,15 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void clickOnBackButton();
 
-    public abstract void typeHeightInCentimeters(int height);
+    public abstract void typeHeightInCentimeters(String height);
+
+    public abstract String isInputAgePresent();
+
+    public abstract String isInputFirstHeightPresent();
+
+    public abstract String isInputSecondHeightPresent();
+
+    public abstract String isInputValuePresent();
 
 }
 

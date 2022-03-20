@@ -65,8 +65,8 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(youPage.isGenderSelected(YouPage.FEMALE.getName()), "Female gender isn't selected");
 
         //*TC #4 (Verify valid age values)
-        youPage.typeAge(64);
-        Assert.assertEquals(64, 64, "Age is incorrect");
+        youPage.typeAge("64");
+        Assert.assertEquals(youPage.isInputAgePresent(), "64", "Age is incorrect");
 
         //*TC #5 (Verify location address via dropdown)
         youPage.selectCountryFromDropdown(YouPage.ZAMBIA);
@@ -76,10 +76,10 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         //*TC #6 (Verify input valid values on Height)
         //* 6.1 (Verify input values in Feet Inches)
         youPage.clickOnHeightButton();
-        youPage.typeFirstHeight(5);
-        Assert.assertEquals(5, 5, "First height is wrong");
-        youPage.typeSecondHeight(6);
-        Assert.assertEquals(6, 6, "Second height is wrong");
+        youPage.typeFirstHeight("5");
+        Assert.assertEquals(youPage.isInputFirstHeightPresent(), "5", "First height is wrong");
+        youPage.typeSecondHeight("6");
+        Assert.assertEquals(youPage.isInputSecondHeightPresent(), "6", "Second height is wrong");
         youPage.selectHeightUnitFromDropdown(YouPage.FEET_INCHES);
         Assert.assertTrue(youPage.isHeightUnitSelected(YouPage.FEET_INCHES.getName()),
                 "Feet Inches units is not selected");
@@ -88,15 +88,16 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         youPage.selectHeightUnitFromDropdown(YouPage.CENTIMETERS);
         Assert.assertTrue(youPage.isHeightUnitSelected(YouPage.CENTIMETERS.getName()),
                 "Units in centimeters are not selected");
-        youPage.typeHeightInCentimeters(200);
-        Assert.assertEquals(200, 200, "Height in centimeters is wrong");
+        youPage.typeHeightInCentimeters("200");
+        Assert.assertEquals(youPage.isInputFirstHeightPresent(),
+                "200", "Height in centimeters is wrong");
         youPage.clickOnSetButton();
 
         //*TC #7 (Verify input valid values on current Weight)
         //* 7.1 (Verify input values in 'Pounds')
         youPage.clickOnWeightButton();
-        youPage.typeWeight(30);
-        Assert.assertEquals(30, 30, "Weight is incorrect");
+        youPage.typeWeight("30");
+        Assert.assertEquals(youPage.isInputValuePresent(), "30", "Weight is incorrect");
         youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
                 "Weight Pounds unit is not selected");
@@ -105,15 +106,16 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         youPage.selectWeightUnitFromDropdown(YouPage.KILOGRAMS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
                 "Weight unit is not selected");
-        youPage.typeWeight(400);
-        Assert.assertEquals(400, 400, "Weight is incorrect");
+        youPage.typeWeight("400");
+        Assert.assertEquals(youPage.isInputValuePresent(), "400", "Weight is incorrect");
         youPage.clickOnSetButton();
 
         //*TC #8 (Verify input values in Goal Weight)
         //* #8.1 (Verify input values in 'Kilograms')
         WeeklyGoalPageBase weeklyGoalPage = youPage.followToGoalWeight();
-        weeklyGoalPage.typeWeight(400);
-        Assert.assertEquals(400, 400, "Weight value is incorrect");
+        weeklyGoalPage.typeWeight("400");
+        Assert.assertEquals(weeklyGoalPage.isInputWeightPresent(),
+                "400", "Weight value is incorrect");
         weeklyGoalPage.selectWeightUnitFromDropdown(YouPage.KILOGRAMS);
         Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
                 "Weekly Goal Weight in Kilogram unit is not selected");
@@ -133,8 +135,9 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         weeklyGoalPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
                 "Weekly Goal Weight in Pounds unit is not selected");
-        weeklyGoalPage.typeWeightAgain(170);
-        Assert.assertEquals(170, 170, "Pounds Weight is incorrect");
+        weeklyGoalPage.typeWeightAgain("170");
+        Assert.assertEquals(weeklyGoalPage.isInputWeightPresent(),
+                "170", "Pounds Weight is incorrect");
         weeklyGoalPage.clickOnSetButton();
 
         //*TC #9.2 (Verify the ability to toggle the Weekly goal 'Pounds')
@@ -145,5 +148,53 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected
                         (YouPage.LOSE_ONE_POINT_FIVE_LBS_PER_WEEK.getName()),
                 "Weekly Goal Weight in Pounds is not switched");
+
+
+        //*TC #10 (Verify that password can include any category of symbols)
+        CreateAccountPageBase createAccountPage = weeklyGoalPage.followToCreateAccountPage();
+        createAccountPage.typePassword(VALUE_MIX);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), VALUE_MIX, "Password is incorrect");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        createAccountPage.typePassword(LOWER_CASE_LETTERS);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), LOWER_CASE_LETTERS, "Password is incorrect");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        createAccountPage.typePassword(UPPER_CASE_LETTERS);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), UPPER_CASE_LETTERS, "Password is incorrect");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        createAccountPage.typePassword(DIGITS);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), DIGITS, "Password is incorrect");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        createAccountPage.typePassword(SIGNS);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), SIGNS, "Password is incorrect");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        //*TC #11 (Verify that password can include less than 10 characters)
+        createAccountPage.typePassword(TOO_SHORT_PASSWORD);
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), TOO_SHORT_PASSWORD, "Password is too short");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
+
+        //*TC #12 (Verify that email can include wrong format)
+        createAccountPage.typeEmail(INVALID_EMAIL);
+        Assert.assertEquals(createAccountPage.inputEmailPresent(), INVALID_EMAIL, "Email has a wrong format");
+        createAccountPage.clickOnSignUpButton();
+        Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
+        createAccountPage.clickOnOkButton();
     }
+
 }

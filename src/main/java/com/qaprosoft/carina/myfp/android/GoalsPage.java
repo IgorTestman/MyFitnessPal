@@ -15,8 +15,8 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = GoalsPageBase.class)
 public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConstants {
 
-    @FindBy(xpath = "//android.widget.ImageButton[@index='0']")
-    private ExtendedWebElement backBtn;
+    @FindBy(xpath = "//android.widget.ImageButton")
+    private ExtendedWebElement backButton;
 
     @FindBy(xpath = "//android.widget.TextView[@text='Goals']")
     private ExtendedWebElement goalsTab;
@@ -31,7 +31,7 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
     private ExtendedWebElement subtitleText;
 
     @FindBy(xpath = "//android.widget.CheckedTextView[@text='%s']")
-    private ExtendedWebElement selectGoalBtn;
+    private ExtendedWebElement itemByText;
 
     @FindBy(id = "com.myfitnesspal.android:id/container")
     private ExtendedWebElement container;
@@ -55,28 +55,22 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
     private ExtendedWebElement errorNameGoals;
 
     @FindBy(id = "android:id/button1")
-    private ExtendedWebElement okBtnGoals;
+    private ExtendedWebElement okButtonGoals;
 
     @FindBy(id = "com.myfitnesspal.android:id/followupTextView")
-    private ExtendedWebElement followupTextView;
+    private ExtendedWebElement followUpTextView;
 
     @FindBy(id = "com.myfitnesspal.android:id/nextButton")
-    private ExtendedWebElement nextBtn;
-
-    @FindBy(id = "com.myfitnesspal.android:id/followupTextView")
-    private ExtendedWebElement followUpText;
+    private ExtendedWebElement nextButton;
 
     @FindBy(xpath = "//android.widget.TextView[@text='How many steps do you take per day now?']")
-    private ExtendedWebElement followSteps;
+    private ExtendedWebElement followToSteps;
 
     @FindBy(id = "com.myfitnesspal.android:id/subtitleTextView")
-    private ExtendedWebElement selectOne;
+    private ExtendedWebElement selectOneOption;
 
     @FindBy(id = "com.myfitnesspal.android:id/leadingTextView")
     private ExtendedWebElement leadingText;
-
-    @FindBy(id = "com.myfitnesspal.android:id/leadingTextView")
-    private ExtendedWebElement moreDetails;
 
     public GoalsPage(WebDriver driver) {
         super(driver);
@@ -99,7 +93,7 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public ActivityLevelPageBase clickOnNextButton() {
-        nextBtn.click();
+        nextButton.click();
         return initPage(getDriver(), ActivityLevelPageBase.class);
     }
 
@@ -110,7 +104,7 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public void clickOnBackButton() {
-        backBtn.click(THREE_SECONDS);
+        backButton.click(THREE_SECONDS);
     }
 
     @Override
@@ -130,38 +124,38 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public boolean isOkButtonGoalsPresent() {
-        return okBtnGoals.isElementPresent(THREE_SECONDS);
+        return okButtonGoals.isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public void clickOnOkButtonGoals() {
-        okBtnGoals.click();
+        okButtonGoals.click();
     }
 
     @Override
     public AbstractPage clickOnButton(Goals page) {
-        selectGoalBtn.format(page.getName()).click(THREE_SECONDS);
+        itemByText.format(page.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), page.getPageClass());
     }
 
     @Override
     public boolean isButtonActive(String goal) {
-        return selectGoalBtn.format(goal).isClickable(THREE_SECONDS);
+        return itemByText.format(goal).isClickable(THREE_SECONDS);
     }
 
     @Override
     public boolean isFollowUpPageOpened() {
-        return followUpText.isElementPresent(THREE_SECONDS);
+        return itemByText.isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public boolean isFollowToStepsPageOpened() {
-        return followSteps.isElementPresent(THREE_SECONDS);
+        return followToSteps.isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public boolean isAchieveOfResultPageOpened() {
-        return selectOne.isElementPresent(THREE_SECONDS);
+        return selectOneOption.isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -171,7 +165,7 @@ public class GoalsPage extends GoalsPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public boolean isMoreDetailsPageOpened() {
-        return moreDetails.isElementPresent(THREE_SECONDS);
+        return leadingText.isElementPresent(THREE_SECONDS);
     }
 
     @Override

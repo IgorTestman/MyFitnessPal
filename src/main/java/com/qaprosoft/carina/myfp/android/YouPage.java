@@ -20,7 +20,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @FindBy(xpath = "//android.widget.RadioButton[@text='%s']")
-    private ExtendedWebElement genderButton;
+    private ExtendedWebElement itemByGenderButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/birthDate")
     private ExtendedWebElement birthDateField;
@@ -44,10 +44,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     private ExtendedWebElement currentWeightButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_one")
-    private ExtendedWebElement entryFirstHeight;
+    private ExtendedWebElement entryFirstValue;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_two")
-    private ExtendedWebElement entrySecondHeight;
+    private ExtendedWebElement entrySecondValue;
 
     @FindBy(id = "android:id/button1")
     private ExtendedWebElement setButton;
@@ -56,16 +56,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     private ExtendedWebElement unitsDropdown;
 
     @FindBy(xpath = "//android.widget.CheckedTextView[@text='%s']")
-    private ExtendedWebElement unitsWeight;
-
-    @FindBy(xpath = "//android.widget.CheckedTextView[@text='%s']")
-    private ExtendedWebElement unitsHeight;
+    private ExtendedWebElement itemByText;
 
     @FindBy(xpath = "//android.widget.TextView[@text='%s']")
-    private ExtendedWebElement chosenUnitsHeight;
-
-    @FindBy(xpath = "//android.widget.TextView[@text='%s']")
-    private ExtendedWebElement chosenUnitsWeight;
+    private ExtendedWebElement itemByChosenText;
 
     @FindBy(xpath = "//android.widget.ImageButton[@index='0']")
     private ExtendedWebElement backButton;
@@ -78,13 +72,13 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeAge(int date) {
+    public void typeAge(String date) {
         birthDateField.type(String.valueOf(date));
     }
 
     @Override
     public AbstractPage clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage gender) {
-        genderButton.format(gender.getName()).click(THREE_SECONDS);
+        itemByGenderButton.format(gender.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), gender.getPageClass());
     }
 
@@ -100,7 +94,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
 
     @Override
     public boolean isGenderSelected(String gender) {
-        return genderButton.format(gender).isClickable(THREE_SECONDS);
+        return itemByGenderButton.format(gender).isClickable(THREE_SECONDS);
     }
 
     @Override
@@ -114,13 +108,13 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeFirstHeight(int value) {
-        entryFirstHeight.type(String.valueOf(value));
+    public void typeFirstHeight(String  firstValue) {
+        entryFirstValue.type(String.valueOf(firstValue));
     }
 
     @Override
-    public void typeSecondHeight(int value) {
-        entrySecondHeight.type(String.valueOf(value));
+    public void typeSecondHeight(String secondValue) {
+        entrySecondValue.type(String.valueOf(secondValue));
     }
 
     @Override
@@ -130,32 +124,32 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeWeight(int value) {
-        entryFirstHeight.type(String.valueOf(value));
+    public void typeWeight(String value) {
+        entryFirstValue.type(String.valueOf(value));
     }
 
     @Override
     public AbstractPage selectHeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage height) {
         unitsDropdown.click();
-        unitsHeight.format(height.getName()).click(THREE_SECONDS);
+        itemByText.format(height.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), height.getPageClass());
     }
 
     @Override
     public boolean isHeightUnitSelected(String unit) {
-        return chosenUnitsHeight.format(unit).isElementPresent(THREE_SECONDS);
+        return itemByChosenText.format(unit).isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public AbstractPage selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage weight) {
         unitsDropdown.click();
-        unitsWeight.format(weight.getName()).click(THREE_SECONDS);
+        itemByText.format(weight.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), weight.getPageClass());
     }
 
     @Override
     public boolean isWeightUnitSelected(String unit) {
-        return chosenUnitsWeight.format(unit).isElementPresent(THREE_SECONDS);
+        return itemByChosenText.format(unit).isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -170,7 +164,28 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeHeightInCentimeters(int height) {
-        entryFirstHeight.type(String.valueOf(height));
+    public void typeHeightInCentimeters(String height) {
+        entryFirstValue.type(String.valueOf(height));
     }
+
+    @Override
+    public String isInputAgePresent() {
+        return birthDateField.getText();
+    }
+
+    @Override
+    public String isInputFirstHeightPresent() {
+        return entryFirstValue.getText();
+    }
+
+    @Override
+    public String isInputValuePresent() {
+        return entryFirstValue.getText();
+    }
+
+    @Override
+    public String isInputSecondHeightPresent() {
+        return entrySecondValue.getText();
+    }
+
 }

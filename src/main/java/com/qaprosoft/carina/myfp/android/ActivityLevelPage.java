@@ -16,33 +16,33 @@ public class ActivityLevelPage extends ActivityLevelPageBase implements IMobileU
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@text='%s']")
-    private ExtendedWebElement selectLevelButton;
+    @FindBy(xpath = "//*[@text = '%s']")
+    private ExtendedWebElement itemByText;
 
-    @FindBy(xpath = "//android.widget.ImageButton[@index='0']")
-    private ExtendedWebElement backToGoalBtn;
+    @FindBy(xpath = "//android.widget.ImageButton")
+    private ExtendedWebElement backButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/buttonNext")
-    private ExtendedWebElement nextBtn;
+    private ExtendedWebElement nextButton;
 
     @Override
     public void clickOnBackButton() {
-        backToGoalBtn.click();
+        backButton.click();
     }
 
     @Override
     public boolean isButtonActive(String activityLevel) {
-        return selectLevelButton.format(activityLevel).isPresent(THREE_SECONDS);
+        return itemByText.format(activityLevel).isPresent(THREE_SECONDS);
     }
 
     @Override
     public void clickOnNextButton() {
-        nextBtn.click();
+        nextButton.click();
     }
 
     @Override
     public YouPageBase selectActivity(ActivityLevel activityLevel) {
-        selectLevelButton.format(activityLevel.getName()).click(THREE_SECONDS);
+        itemByText.format(activityLevel.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), YouPageBase.class);
     }
 }

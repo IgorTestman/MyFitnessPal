@@ -77,5 +77,4 @@ public class StartPage extends StartPageBase implements TimeConstants {
         sigUpButton.click(THREE_SECONDS);
         return initPage(getDriver(), SignUpPageBase.class);
     }
-
 }

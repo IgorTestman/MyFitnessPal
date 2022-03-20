@@ -41,7 +41,6 @@ public abstract class LoginPageBase extends AbstractPage implements TextConstant
     public abstract String getFacebookBtnText();
 
     public abstract String getLogInText();
-
 }
 
 

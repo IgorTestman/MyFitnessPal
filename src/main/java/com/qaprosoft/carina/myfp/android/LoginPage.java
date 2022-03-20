@@ -14,7 +14,7 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConstants {
 
     @FindBy(id = "com.myfitnesspal.android:id/email_address_edit")
-    private ExtendedWebElement emailField;
+    private ExtendedWebElement emailInputField;
 
     @FindBy(id = "com.myfitnesspal.android:id/password_edit")
     private ExtendedWebElement passwordInputField;
@@ -23,10 +23,10 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
     private ExtendedWebElement loginBtn;
 
     @FindBy(id = "com.myfitnesspal.android:id/forgot_password_button")
-    private ExtendedWebElement forgotPasswordBtn;
+    private ExtendedWebElement forgotPasswordButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/facebook_button")
-    private ExtendedWebElement facebookBtn;
+    private ExtendedWebElement facebookButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -34,7 +34,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public boolean isEmailFieldPresent() {
-        return emailField.isElementPresent(THREE_SECONDS);
+        return emailInputField.isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -44,12 +44,12 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public boolean isForgotPasswordButtonPresent() {
-        return forgotPasswordBtn.isElementPresent(THREE_SECONDS);
+        return forgotPasswordButton.isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public boolean isFacebookButtonPresent() {
-        return facebookBtn.isElementPresent(THREE_SECONDS);
+        return facebookButton.isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public void typeEmailAddress(String name) {
-        emailField.type(name);
+        emailInputField.type(name);
         hideKeyboard();
     }
 
@@ -86,7 +86,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public boolean isEmailAddressFieldBelowPasswordField() {
-        return emailField.getLocation().getY() < passwordInputField.getLocation().getY();
+        return emailInputField.getLocation().getY() < passwordInputField.getLocation().getY();
     }
 
     @Override
@@ -96,7 +96,7 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public String getEmailAddressFieldText() {
-        return emailField.getText();
+        return emailInputField.getText();
     }
 
     @Override
@@ -111,14 +111,13 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
 
     @Override
     public String getForgotPasswordBtnText() {
-        return forgotPasswordBtn.getText();
+        return forgotPasswordButton.getText();
     }
 
     @Override
     public String getFacebookBtnText() {
-        return facebookBtn.getText();
+        return facebookButton.getText();
     }
-
 }
 
 

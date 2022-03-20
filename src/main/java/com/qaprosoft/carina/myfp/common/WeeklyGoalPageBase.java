@@ -12,7 +12,7 @@ public abstract class WeeklyGoalPageBase extends AbstractPage {
 
     public abstract AbstractPage selectWeightUnitFromDropdown(YouPage weight);
 
-    public abstract void typeWeight(int date);
+    public abstract void typeWeight(String value);
 
     public abstract boolean isWeightUnitSelected(String unit);
 
@@ -22,8 +22,12 @@ public abstract class WeeklyGoalPageBase extends AbstractPage {
 
     public abstract boolean isWeeklyGoalSelected(String weeklyGoal);
 
-    public abstract void typeWeightAgain(int weight);
+    public abstract void typeWeightAgain(String weight);
 
     public abstract void clickToOpenDropdownWeight();
+
+    public abstract CreateAccountPageBase followToCreateAccountPage();
+
+    public abstract String isInputWeightPresent();
 
 }
