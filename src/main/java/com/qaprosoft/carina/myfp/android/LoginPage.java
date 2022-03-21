@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.myfp.common.LoginPageBase;
+import com.qaprosoft.carina.myfp.common.MainPageBase;
 import com.qaprosoft.carina.myfp.common.StartPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import org.openqa.selenium.WebDriver;
@@ -117,6 +118,12 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
     @Override
     public String getFacebookBtnText() {
         return facebookButton.getText();
+    }
+
+    @Override
+    public MainPageBase clickOnLogInButton() {
+        loginBtn.click(THREE_SECONDS);
+        return initPage(getDriver(), MainPageBase.class);
     }
 }
 

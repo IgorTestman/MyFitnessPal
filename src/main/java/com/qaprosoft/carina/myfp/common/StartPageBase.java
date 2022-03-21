@@ -27,4 +27,5 @@ public abstract class StartPageBase extends AbstractPage {
 
     public abstract SignUpPageBase clickOnSignUpButton();
 
-}
+
+    }
