@@ -1,39 +1,55 @@
 package com.qaprosoft.carina.myfp;
 
 import com.qaprosoft.carina.core.foundation.IAbstractTest;
-import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
-import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
-import com.qaprosoft.carina.myfp.common.LoginPageBase;
-import com.qaprosoft.carina.myfp.common.MainPageBase;
-import com.qaprosoft.carina.myfp.common.StartPageBase;
+import com.qaprosoft.carina.myfp.common.*;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
+import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
+import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.regex.Pattern;
+import org.testng.asserts.SoftAssert;
+
 
 public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstants {
-        private static final CryptoTool cryptoTool = new CryptoTool("./.settings/crypto.key");
-        private static final Pattern CRYPTO_PATTERN = Pattern.compile(SpecialKeywords.CRYPT);
-        private static final String EMAIL = cryptoTool.decryptByPattern(R.EMAIL.get("user1.email"), CRYPTO_PATTERN);
-        private static final String PASSWORD = cryptoTool.decryptByPattern(R.EMAIL.get("user1.password"), CRYPTO_PATTERN);
-
+    private final String SALAD_ASIAN = "Salad asian";
+    private final String SALAD = "Salad";
+    private final String SALAD_CALORIES = "160";
+    private final String FOOD_DETAILS = "Asian salad, 1.0 cup";
 
     @Test()
     @MethodOwner(owner = "IgorB")
-    @TestLabel(name = "Second Test", value = {"mobile", "regression"})
-    public void validationUiElementsOnUserPageTest() {
+    @TestLabel(name = "Third Test", value = {"mobile", "regression"})
+    public void DiaryPageTestItemsFood() {
+        SoftAssert softAssert = new SoftAssert();
 
         StartPageBase startPage = initPage(getDriver(), StartPageBase.class);
-        LoginPageBase loginPage = startPage.clickLogInButton();
-        loginPage.typeEmailAddress(EMAIL);
-        loginPage.typePassword(PASSWORD);
-        MainPageBase mainPage = loginPage.clickOnLogInButton();
-        mainPage.closeImage();
-        Assert.assertTrue(mainPage.isPageDownloaded(), "Main page isn't downloaded");
+        LoginPageBase loginPage = startPage.clickOnLogInButton();
+        loginPage.login();
+        UserPageBase userPage = loginPage.clickOnLogInButton();
+        userPage.pageIsLoaded();
+        Assert.assertTrue(userPage.isPageOpen(), "User page isn't opened");
+        DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnTab(UserPageEnum.DIARY);
+        Assert.assertTrue(diaryPage.isPageOpen(), "Diary page isn't opened");
+        softAssert.assertFalse(diaryPage.editFoodButtonIsPresent(), "Food is added");
+        BreakfastPageBase breakfastPage = diaryPage.clickOnAddFoodButton();
+        breakfastPage.typeFood(SALAD_ASIAN);
+        breakfastPage.clickOnSearchedFoodList();
+        AddFoodPageBase addFoodPage = breakfastPage.clickOnChosenFood();
+        addFoodPage.clickOnPopUp();
+        diaryPage = addFoodPage.clickOnSaveButton();
+
+        //* Verify that salad (meal) with characteristics is added
+        softAssert.assertTrue(diaryPage.editFoodButtonIsPresent(), "Edit Food button isn't present");
+        softAssert.assertEquals(diaryPage.getAddedFoodName(),SALAD, "Name of food is incorrect");
+        softAssert.assertEquals(diaryPage.getAddedFoodCalories(), SALAD_CALORIES, "Calories are wrong");
+        softAssert.assertEquals(diaryPage.getAddedFoodDetails(), FOOD_DETAILS,
+                "Details of added food are incorrect");
+
+        softAssert.assertAll();
 
     }
+
 }

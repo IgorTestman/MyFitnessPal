@@ -1,18 +1,29 @@
 package com.qaprosoft.carina.myfp.android;
 
+import com.qaprosoft.carina.core.foundation.commons.SpecialKeywords;
+import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
+import com.qaprosoft.carina.core.foundation.utils.R;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.myfp.common.LoginPageBase;
-import com.qaprosoft.carina.myfp.common.MainPageBase;
 import com.qaprosoft.carina.myfp.common.StartPageBase;
+import com.qaprosoft.carina.myfp.common.UserPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.regex.Pattern;
 
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConstants {
+
+    private static final CryptoTool cryptoTool = new CryptoTool("./.settings/crypto.key");
+    private static final Pattern CRYPTO_PATTERN = Pattern.compile(SpecialKeywords.CRYPT);
+    private static final String EMAIL = cryptoTool.decryptByPattern(R.EMAIL.get("user1.email"), CRYPTO_PATTERN);
+    private static final String PASSWORD = cryptoTool.decryptByPattern(R.EMAIL.get("user1.password"), CRYPTO_PATTERN);
 
     @FindBy(id = "com.myfitnesspal.android:id/email_address_edit")
     private ExtendedWebElement emailInputField;
@@ -121,9 +132,16 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
     }
 
     @Override
-    public MainPageBase clickOnLogInButton() {
-        loginBtn.click(THREE_SECONDS);
-        return initPage(getDriver(), MainPageBase.class);
+    public UserPageBase clickOnLogInButton() {
+        loginBtn.click(SIXTY_SECONDS);
+        waitUntil(ExpectedConditions.visibilityOf(loginBtn.getElement()), TEN_TIMEOUT);
+        return initPage(getDriver(), UserPageBase.class);
+    }
+
+    @Override
+    public void login() {
+        emailInputField.type(EMAIL);
+        passwordInputField.type(PASSWORD);
     }
 }
 
