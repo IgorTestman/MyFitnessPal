@@ -42,9 +42,7 @@ public abstract class LoginPageBase extends AbstractPage implements TextConstant
 
     public abstract String getLogInText();
 
-    public abstract UserPageBase clickOnLogInButton();
-
-    public abstract void login();
+    public abstract UserPageBase logIn();
 
 }
 

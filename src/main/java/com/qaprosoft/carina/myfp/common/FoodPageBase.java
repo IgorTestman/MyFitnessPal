@@ -4,9 +4,9 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import org.openqa.selenium.WebDriver;
 
-public abstract class BreakfastPageBase extends AbstractPage implements TextConstants {
+public abstract class FoodPageBase extends AbstractPage implements TextConstants {
 
-    public BreakfastPageBase(WebDriver driver) {
+    public FoodPageBase(WebDriver driver) {
         super(driver);
     }
 
@@ -15,6 +15,8 @@ public abstract class BreakfastPageBase extends AbstractPage implements TextCons
     public abstract void clickOnSearchedFoodList();
 
     public abstract void typeFood(String food);
+
+    public abstract void addFood(String SALAD_ASIAN);
 
 }
 

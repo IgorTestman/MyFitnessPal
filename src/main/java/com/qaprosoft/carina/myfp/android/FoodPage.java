@@ -4,17 +4,18 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.myfp.common.AddFoodPageBase;
-import com.qaprosoft.carina.myfp.common.BreakfastPageBase;
+import com.qaprosoft.carina.myfp.common.FoodPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = BreakfastPageBase.class)
-public class BreakfastPage extends BreakfastPageBase implements TimeConstants, IMobileUtils, TextConstants {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = FoodPageBase.class)
+public class FoodPage extends FoodPageBase implements TimeConstants, IMobileUtils, TextConstants {
+    private static final String SALAD_ASIAN = "Salad asian";
 
-    public BreakfastPage(WebDriver driver) {
+    public FoodPage(WebDriver driver) {
         super(driver);
     }
 
@@ -28,9 +29,9 @@ public class BreakfastPage extends BreakfastPageBase implements TimeConstants, I
     private ExtendedWebElement chosenFood;
 
     @Override
-    public void typeFood(String food) {
+    public void typeFood(String SALAD_ASIAN) {
         searchField.click();
-        searchField.type(food);
+        searchField.type(SALAD_ASIAN);
     }
 
     @Override
@@ -43,5 +44,12 @@ public class BreakfastPage extends BreakfastPageBase implements TimeConstants, I
         chosenFood.click(THREE_SECONDS);
         waitUntil(ExpectedConditions.visibilityOf(chosenFood.getElement()), TEN_TIMEOUT);
         return initPage(getDriver(), AddFoodPageBase.class);
+    }
+
+    @Override
+    public void addFood(String SALAD_ASIAN) {
+        searchField.click();
+        searchField.type(SALAD_ASIAN);
+        clickOnSearchedFoodList();
     }
 }

@@ -132,17 +132,14 @@ public class LoginPage extends LoginPageBase implements IMobileUtils, TimeConsta
     }
 
     @Override
-    public UserPageBase clickOnLogInButton() {
+    public UserPageBase logIn() {
+        emailInputField.type(EMAIL);
+        passwordInputField.type(PASSWORD);
         loginBtn.click(SIXTY_SECONDS);
         waitUntil(ExpectedConditions.visibilityOf(loginBtn.getElement()), TEN_TIMEOUT);
         return initPage(getDriver(), UserPageBase.class);
     }
 
-    @Override
-    public void login() {
-        emailInputField.type(EMAIL);
-        passwordInputField.type(PASSWORD);
-    }
 }
 
 

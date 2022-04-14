@@ -26,12 +26,16 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract String isDetailsOfAddedFoodPresent();
 
-    public abstract BreakfastPageBase clickOnAddFoodButton();
+    public abstract FoodPageBase clickOnAddFoodButton();
 
-    public abstract String getAddedFoodName();
+    public abstract String getAddedMealName();
 
-    public abstract String getAddedFoodCalories();
+    public abstract boolean getAddedFoodName();
 
-    public abstract String getAddedFoodDetails();
+    public abstract boolean getAddedFoodCalories();
+
+    public abstract boolean getAddedFoodDetails();
+
+    public abstract boolean getMeal();
 
 }

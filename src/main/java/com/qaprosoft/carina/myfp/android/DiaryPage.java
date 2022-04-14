@@ -3,7 +3,7 @@ package com.qaprosoft.carina.myfp.android;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.myfp.common.BreakfastPageBase;
+import com.qaprosoft.carina.myfp.common.FoodPageBase;
 import com.qaprosoft.carina.myfp.common.DiaryPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
@@ -13,6 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DiaryPageBase.class)
 public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUtils, TextConstants {
+    private final String SALAD = "Salad";
+    private final String SALAD_CALORIES = "155";
+    private final String FOOD_DETAILS = "Asian salad, 1.0 cup";
 
     public DiaryPage(WebDriver driver) {
         super(driver);
@@ -47,10 +50,10 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
 
 
     @Override
-    public BreakfastPageBase clickOnAddFoodButton() {
+    public FoodPageBase clickOnAddFoodButton() {
         addFoodButton.click(THREE_SECONDS);
         waitUntil(ExpectedConditions.visibilityOf(addFoodButton.getElement()), TEN_TIMEOUT);
-        return initPage(getDriver(), BreakfastPageBase.class);
+        return initPage(getDriver(), FoodPageBase.class);
     }
 
     @Override
@@ -94,18 +97,30 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public String getAddedFoodName() {
+    public boolean getAddedFoodName() {
+        return textItemDescription.getText().equals(SALAD);
+    }
+
+    @Override
+    public boolean getAddedFoodCalories() {
+        return textCalories.getText().equals(SALAD_CALORIES);
+    }
+
+    @Override
+    public boolean getAddedFoodDetails() {
+        return textItemDetails.getText().equals(FOOD_DETAILS);
+    }
+
+    @Override
+    public String getAddedMealName() {
         return textItemDescription.getText();
     }
 
     @Override
-    public String getAddedFoodCalories() {
-        return textCalories.getText();
+    public boolean getMeal() {
+        getAddedFoodName();
+        getAddedFoodCalories();
+        getAddedFoodDetails();
+        return false;
     }
-
-    @Override
-    public String getAddedFoodDetails() {
-        return textItemDetails.getText();
-    }
-
 }
