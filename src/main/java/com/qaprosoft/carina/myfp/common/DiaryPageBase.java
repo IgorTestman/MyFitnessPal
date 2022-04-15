@@ -2,6 +2,8 @@ package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
+import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
+import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
 
 public abstract class DiaryPageBase extends AbstractPage implements TextConstants {
@@ -26,7 +28,7 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract String isDetailsOfAddedFoodPresent();
 
-    public abstract FoodPageBase clickOnAddFoodButton();
+    public abstract MealPageBase clickOnAddFoodButton();
 
     public abstract String getAddedMealName();
 
@@ -37,5 +39,21 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
     public abstract boolean getAddedFoodDetails();
 
     public abstract boolean getMeal();
+
+    public abstract DiarySettingsPageBase clickOnOptions(ViewOptionsDiaryEnum options);
+
+    public abstract void clickOnTimeStamp();
+
+    public abstract AbstractPage selectEditTimeStamp(TimeStamp timeStamp);
+
+    public abstract void typeHours(String hours);
+
+    public abstract void typeMinutes(String hours);
+
+    public abstract void enterTime();
+
+    public abstract String getAddedTimeStamps();
+
+    public abstract String isTimeStampPresent();
 
 }

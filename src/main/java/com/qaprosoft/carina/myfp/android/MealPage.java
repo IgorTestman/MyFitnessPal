@@ -4,18 +4,18 @@ import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.myfp.common.AddFoodPageBase;
-import com.qaprosoft.carina.myfp.common.FoodPageBase;
+import com.qaprosoft.carina.myfp.common.MealPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = FoodPageBase.class)
-public class FoodPage extends FoodPageBase implements TimeConstants, IMobileUtils, TextConstants {
+@DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = MealPageBase.class)
+public class MealPage extends MealPageBase implements TimeConstants, IMobileUtils, TextConstants {
     private static final String SALAD_ASIAN = "Salad asian";
 
-    public FoodPage(WebDriver driver) {
+    public MealPage(WebDriver driver) {
         super(driver);
     }
 
