@@ -19,13 +19,13 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
     private static Authorization authorization;
     private final String SALAD_ASIAN = "Salad asian";
     private final String SALAD = "Salad";
-    private final String EXPECTED_TIME = "9:15 PM";
+    private final String EXPECTED_TIME = "9:15 AM";
     private final String NO_TIME = "No Time";
 
     @Test()
     @MethodOwner(owner = "IgorB")
     @TestLabel(name = "Third Test", value = {"mobile", "regression"})
-    public void DiaryPageTestItemsFood() {
+    public void diaryPageTestItemsFood() {
         SoftAssert softAssert = new SoftAssert();
 
         authorization = new Authorization(getDriver());
@@ -44,7 +44,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
     @Test()
     @MethodOwner(owner = "IgorB")
     @TestLabel(name = "Fourth Test", value = {"mobile", "regression"})
-    public void TimeStampsTest() {
+    public void timeStampsTest() {
 
         SoftAssert softAssert = new SoftAssert();
 
@@ -58,7 +58,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
         Assert.assertEquals(diaryPage.isTimeStampPresent(), NO_TIME, "Time stamp isn't present");
         diaryPage.clickOnTimeStamp();
         diaryPage.selectEditTimeStamp(TimeStamp.EDIT_TIME);
-        diaryPage.enterTime();
+        diaryPage.currentTime();
         Assert.assertEquals(diaryPage.getAddedTimeStamps(), EXPECTED_TIME, "Time is wrong");
         softAssert.assertAll();
     }
