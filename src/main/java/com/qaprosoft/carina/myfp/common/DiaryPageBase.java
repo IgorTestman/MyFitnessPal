@@ -2,6 +2,7 @@ package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
+import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
 import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract boolean isMealTimePresent(String meal);
 
-    public abstract String isCaloriesOfMealTimePresent();
+    public abstract String isAddedFoodPresent();
 
     public abstract String isMealMacrosPresent();
 
@@ -28,9 +29,7 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract String isDetailsOfAddedFoodPresent();
 
-    public abstract MealPageBase clickOnAddFoodButton();
-
-    public abstract String getAddedMealName();
+    public abstract boolean getAddedMeal(String food);
 
     public abstract boolean getAddedFoodName();
 
@@ -54,6 +53,12 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract String getAddedTimeStamps();
 
+    public abstract boolean currentTime();
+
+    public abstract String clickOnPmButton();
+
     public abstract String isTimeStampPresent();
 
-}
+    public abstract MealPageBase clickOnAddFoodButton(DiaryEnum diary);
+
+    }

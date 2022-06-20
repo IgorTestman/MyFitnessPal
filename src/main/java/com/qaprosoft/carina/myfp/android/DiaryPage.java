@@ -9,6 +9,7 @@ import com.qaprosoft.carina.myfp.common.MealPageBase;
 import com.qaprosoft.carina.myfp.common.DiaryPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
+import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
 import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +29,7 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     @FindBy(id = "com.myfitnesspal.android:id/edit_action_item")
     private ExtendedWebElement editButton;
 
-    @FindBy(id = "com.myfitnesspal.android:id/add_food")
+    @FindBy(xpath = "//*[@text = '%s']/parent::*/parent::*/following-sibling::android.view.ViewGroup[1]/descendant::*[contains(@text, 'ADD FOOD')]")
     private ExtendedWebElement addFoodButton;
 
     @FindBy(xpath = "//*[@class = 'android.widget.TextView' and @text = 'Breakfast']")
@@ -40,8 +41,8 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     @FindBy(id = "com.myfitnesspal.android:id/meal_macros")
     private ExtendedWebElement mealMacros;
 
-    @FindBy(xpath = "//*[@text='%s']/following-sibling::*/descendant::*[contains(@resource-id, 'com.myfitnesspal.android:id/txtSectionCalories')]")
-    private ExtendedWebElement sectionCalories;
+    @FindBy(xpath = "//*[@text = '%s']/parent::*/following-sibling::android.widget.LinearLayout/descendant::*[contains(@resource-id, 'txtItemDescription')]")
+    private ExtendedWebElement foodName;
 
     @FindBy(id = "com.myfitnesspal.android:id/txtItemDescription")
     private ExtendedWebElement textItemDescription;
@@ -67,6 +68,9 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     @FindBy(id = "com.myfitnesspal.android:id/material_hour_text_input")
     private ExtendedWebElement selectHours;
 
+    @FindBy(id = "com.myfitnesspal.android:id/material_hour_tv")
+    private ExtendedWebElement currentTime;
+
     @FindBy(id = "com.myfitnesspal.android:id/material_timepicker_edit_text")
     private ExtendedWebElement inputTime;
 
@@ -79,13 +83,11 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     @FindBy(id = "com.myfitnesspal.android:id/material_timepicker_mode_button")
     private ExtendedWebElement keyBoardButton;
 
+    @FindBy(id = "com.myfitnesspal.android:id/material_clock_period_am_button")
+    private ExtendedWebElement amButton;
 
-    @Override
-    public MealPageBase clickOnAddFoodButton() {
-        addFoodButton.click(THREE_SECONDS);
-        waitUntil(ExpectedConditions.visibilityOf(addFoodButton.getElement()), TEN_TIMEOUT);
-        return initPage(getDriver(), MealPageBase.class);
-    }
+    @FindBy(id = "com.myfitnesspal.android:id/material_clock_period_pm_button")
+    private ExtendedWebElement pmButton;
 
     @Override
     public boolean isPageOpen() {
@@ -103,8 +105,8 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public String isCaloriesOfMealTimePresent() {
-        return sectionCalories.getText();
+    public String isAddedFoodPresent() {
+        return foodName.getText();
     }
 
     @Override
@@ -143,8 +145,8 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public String getAddedMealName() {
-        return textItemDescription.getText();
+    public boolean getAddedMeal(String food) {
+        return foodName.format(food).isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -198,9 +200,34 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     public String getAddedTimeStamps() {
         return timeStamp.getText();
     }
+    public String clickOnPmButton() {
+        pmButton.click(SEVEN_SECONDS);
+        enterTime();
+        return null;
+    }
 
+    public boolean clickOnAmButton() {
+        amButton.click(SEVEN_SECONDS);
+        enterTime();
+        return true;
+    }
+    @Override
+    public boolean currentTime() {
+        int hour;
+        hour = Integer.parseInt(currentTime.getText());
+        if (hour <= 12 && amButton.isChecked()) {
+            return Boolean.parseBoolean(clickOnPmButton());
+        }
+    else return clickOnAmButton();
+}
     @Override
     public String isTimeStampPresent() {
         return timeStamp.getText();
+    }
+
+    @Override
+    public MealPageBase clickOnAddFoodButton(DiaryEnum diary) {
+        addFoodButton.format(diary.getName()).click(THREE_SECONDS);
+        return initPage(getDriver(), MealPageBase.class);
     }
 }

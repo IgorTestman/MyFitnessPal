@@ -4,7 +4,14 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.common.DiaryPageBase;
 
 public enum DiaryEnum {
-    BREAKFAST("Breakfast", DiaryPageBase.class);
+    BREAKFAST("Breakfast", DiaryPageBase.class),
+    LUNCH ("LUNCH", DiaryPageBase.class),
+    DINNER ("Dinner", DiaryPageBase.class),
+    SNACKS ("Snacks", DiaryPageBase.class),
+    EXERCISE ("Exercise", DiaryPageBase.class),
+    WATER ("Water", DiaryPageBase.class);
+
+
     private String name;
     private Class<? extends AbstractPage> pageClass;
 
