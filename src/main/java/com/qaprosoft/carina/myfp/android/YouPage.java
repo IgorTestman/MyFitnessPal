@@ -44,6 +44,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     private ExtendedWebElement currentWeightButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_one")
+
     private ExtendedWebElement entryFirstValue;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_two")
@@ -63,6 +64,9 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
 
     @FindBy(xpath = "//android.widget.ImageButton[@index='0']")
     private ExtendedWebElement backButton;
+
+    @FindBy(xpath = "//android.widget.TextView[@text='Please enter a valid weight']")
+    private ExtendedWebElement errorMessage;
 
     @Override
     public AbstractPage selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage country) {
@@ -108,7 +112,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeFirstHeight(String  firstValue) {
+    public void typeFirstHeight(String firstValue) {
         entryFirstValue.type(String.valueOf(firstValue));
     }
 
@@ -126,6 +130,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     @Override
     public void typeWeight(String value) {
         entryFirstValue.type(String.valueOf(value));
+        clickOnSetButton();
     }
 
     @Override
@@ -177,15 +182,31 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     public String isInputFirstHeightPresent() {
         return entryFirstValue.getText();
     }
-
+    //* I hope I did it wright
     @Override
     public String isInputValuePresent() {
-        return entryFirstValue.getText();
+        return String.valueOf(currentWeightButton.getText());
     }
 
     @Override
     public String isInputSecondHeightPresent() {
         return entrySecondValue.getText();
+    }
+
+    @Override
+    public void inputValues() {
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage.MALE);
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage.FEMALE);
+        typeAge("64");
+        selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage.ZAMBIA);
+        clickOnNextButton();
+        clickOnWeightButton();
+        selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage.KILOGRAMS);
+    }
+
+    @Override
+    public String errorMessageIsPresent() {
+        return errorMessage.getText();
     }
 
 }

@@ -97,7 +97,8 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         //* 7.1 (Verify input values in 'Pounds')
         youPage.clickOnWeightButton();
         youPage.typeWeight("30");
-        Assert.assertEquals(youPage.isInputValuePresent(), "30 lbs", "Weight is incorrect");
+        ///////////////* parsing String to int...
+        Assert.assertEquals(youPage.isInputValuePresent(), 30 + " lbs", "Weight is incorrect");
         youPage.clickOnWeightButton();
         youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),

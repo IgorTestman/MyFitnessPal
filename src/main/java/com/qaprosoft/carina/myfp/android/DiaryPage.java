@@ -208,14 +208,12 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
         return initPage(getDriver(), MealPageBase.class);
     }
 
+    //* edited name of method
     @Override
     public void selectTimeFormat(String format) {
-        if (amButton.isChecked()){
-        timeFormatButton.format(format).click();
-        enterTime();
-        }
-       else if (pmButton.isChecked()){
-            enterTime();
+        if (amButton.isChecked()) {
+            timeFormatButton.format(format).click();
+
         }
     }
 }

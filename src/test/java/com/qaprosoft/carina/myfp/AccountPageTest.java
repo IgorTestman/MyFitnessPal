@@ -11,7 +11,6 @@ import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import com.qaprosoft.carina.myfp.utils.services.Authorization;
 import com.zebrunner.agent.core.annotation.TestLabel;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -54,13 +53,14 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
         DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnTab(UserPageEnum.DIARY);
         DiarySettingsPageBase diarySettings = diaryPage.clickOnOptions(ViewOptionsDiaryEnum.DIARY_SETTINGS);
         diarySettings.clickOnTimeStampsCheckbox();
-        Assert.assertTrue(diarySettings.checkBoxChecked(true), "Checkbox isn't checked");
+        softAssert.assertTrue(diarySettings.checkBoxChecked(true), "Checkbox isn't checked");
         diaryPage = diarySettings.clickOnBackButton();
-        Assert.assertEquals(diaryPage.getTimeStampsText(), NO_TIME, "Time stamp isn't present");
+        softAssert.assertEquals(diaryPage.getTimeStampsText(), NO_TIME, "Time stamp isn't present");
         diaryPage.clickOnTimeStamp();
         diaryPage.selectEditTimeStamp(TimeStamp.EDIT_TIME);
         diaryPage.selectTimeFormat("PM");
-        Assert.assertEquals(diaryPage.getAddedTimeStampsText(), EXPECTED_TIME, "Time is wrong");
+        diaryPage.enterTime();
+        softAssert.assertEquals(diaryPage.getAddedTimeStampsText(), EXPECTED_TIME, "Time is wrong");
         softAssert.assertAll();
     }
 }

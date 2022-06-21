@@ -5,9 +5,9 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.myfp.common.MyGoalsPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
+import com.qaprosoft.carina.myfp.utils.enums.Goals;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Random;
 
@@ -21,74 +21,46 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     @FindBy(id = "com.myfitnesspal.android:id/textMyGoals")
     private ExtendedWebElement myGoalsTab;
 
-    @FindBy(xpath = "//android.widget.ListView/android.widget.LinearLayout[2]")
-    private ExtendedWebElement currentWeightButton;
-
-    @FindBy(xpath = "//android.widget.ListView/android.widget.LinearLayout[3]")
-    private ExtendedWebElement goalWeightButton;
+    @FindBy(xpath = "//android.widget.TextView[@text='%s']")
+    private ExtendedWebElement weightButton;
 
     @FindBy(xpath = "//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.NumberPicker")
     private ExtendedWebElement numberPicker;
 
-    @FindBy(xpath = "//android.widget.EditText [@text='1000']")
-    private ExtendedWebElement scrollToMax;
-
     @FindBy(id = "android:id/button1")
-    private ExtendedWebElement yesButton;
+    private ExtendedWebElement okButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/txtValue")
     private ExtendedWebElement typeCurrentWeight;
 
-    @FindBy(id = "android:id/button1")
-    private ExtendedWebElement setButton;
-
     @FindBy(xpath = "//android.widget.TextView[@text='Please enter your current weight.']")
     private ExtendedWebElement alertTitle;
-
-    @FindBy(xpath = "//*[@resource-id='android:id/button1']")
-    private ExtendedWebElement dismissButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/alertTitle")
     private ExtendedWebElement alertTitleText;
 
-    @FindBy(xpath = "//android.widget.TextView[@text='998 lbs']")
-    private ExtendedWebElement textChosenWeight;
-
-    @FindBy(xpath = "//android.widget.TextView[@text='1,000 lbs']")
-    private ExtendedWebElement textChosenGoalWeight;
-
+   // * removed all unnecessary web elements, created flexible xpath's and methods
     @Override
     public void clickOnMyGoals() {
         myGoalsTab.click(THREE_SECONDS);
     }
 
-    @Override
-    public void clickOnCurrentWeightButton() {
-        currentWeightButton.click(THREE_SECONDS);
-    }
 
     @Override
     public void clickOnYesButton() {
-        yesButton.click(THREE_SECONDS);
+        okButton.click(THREE_SECONDS);
     }
 
     @Override
     public void typeCurrentWeight(String currentWeight) {
-        clickOnCurrentWeightButton();
         clickOnYesButton();
-        typeCurrentWeight.type(currentWeight);
-        setButton.click();
+        typeCurrentWeight.type(String.valueOf(currentWeight));
+        okButton.click();
     }
 
     @Override
     public void clickOnSetButton() {
-        setButton.click(THREE_SECONDS);
-    }
-
-    @Override
-    public void clickOnOtherSetButton() {
-        waitUntil(ExpectedConditions.visibilityOf(textChosenGoalWeight.getElement()), TEN_TIMEOUT);
-        setButton.click(THREE_SECONDS);
+        okButton.click(THREE_SECONDS);
     }
 
     @Override
@@ -98,7 +70,7 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
 
     @Override
     public void clickOnDismissButton() {
-        dismissButton.click(THREE_SECONDS);
+        okButton.click(THREE_SECONDS);
     }
 
     @Override
@@ -107,40 +79,33 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     }
 
     @Override
-    public void clickOnGoalWeightButton() {
-        goalWeightButton.click(THREE_SECONDS);
+    public boolean isMaxGoalWeightPresent() {
+            return swipeInContainer(numberPicker, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
+        }
+
+    @Override
+    public boolean getChosenWeightText(String weight) {
+        return weightButton.format(weight).isElementPresent();
+    }
+
+    @Override
+    public boolean getChosenGoalWeightText(String goalWeight) {
+        return weightButton.format(goalWeight).isElementPresent();
+    }
+
+    @Override
+    public MyGoalsPageBase clickOnWeightButton(Goals weight) {
+        weightButton.format(weight.getName()).click(THREE_SECONDS);
+        return initPage(getDriver(), MyGoalsPageBase.class);
+    }
+
+    @Override
+    public int typeRandomWeight(int randomWeight) {
         clickOnYesButton();
-    }
-
-    @Override
-    public boolean isMaxValuePresent() {
-        return swipe(scrollToMax, numberPicker, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
-    }
-
-    @Override
-    public boolean scrollPage() {
-        waitUntil(ExpectedConditions.visibilityOf(textChosenGoalWeight.getElement()), TEN_TIMEOUT);
-        return swipeInContainer(numberPicker, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
-    }
-
-    @Override
-    public String getChosenWeightText() {
-        return textChosenWeight.getText();
-    }
-
-    @Override
-    public String getChosenGoalWeightText() {
-        return textChosenGoalWeight.getText();
-    }
-    @Override
-    public void typeCurrentRandomWeight(String currentRandomWeight) {
-        clickOnCurrentWeightButton();
-        clickOnYesButton();
-        Random random = new Random();
-        currentRandomWeight = String.valueOf(random.nextInt(1000));
-        typeCurrentWeight.type(currentRandomWeight);
-
-        setButton.click();
+        randomWeight = new Random().nextInt(1000);
+        typeCurrentWeight.type(String.valueOf(randomWeight));
+        okButton.click();
+        return randomWeight;
     }
 }
 
