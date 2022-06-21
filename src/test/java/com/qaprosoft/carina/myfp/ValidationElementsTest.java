@@ -97,7 +97,8 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         //* 7.1 (Verify input values in 'Pounds')
         youPage.clickOnWeightButton();
         youPage.typeWeight("30");
-        Assert.assertEquals(youPage.isInputValuePresent(), "30", "Weight is incorrect");
+        Assert.assertEquals(youPage.isInputValuePresent(), "30 lbs", "Weight is incorrect");
+        youPage.clickOnWeightButton();
         youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
                 "Weight Pounds unit is not selected");
@@ -107,8 +108,8 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
                 "Weight unit is not selected");
         youPage.typeWeight("400");
-        Assert.assertEquals(youPage.isInputValuePresent(), "400", "Weight is incorrect");
-        youPage.clickOnSetButton();
+        Assert.assertEquals(youPage.isInputValuePresent(), "400 kg", "Weight is incorrect");
+        //////youPage.clickOnSetButton();
 
         //*TC #8 (Verify input values in Goal Weight)
         //* #8.1 (Verify input values in 'Kilograms')
@@ -184,7 +185,8 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
 
         //*TC #11 (Verify that password can include less than 10 characters)
         createAccountPage.typePassword(TOO_SHORT_PASSWORD);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), TOO_SHORT_PASSWORD, "Password is too short");
+        Assert.assertEquals(createAccountPage.inputPasswordPresent(), TOO_SHORT_PASSWORD, "Password is too" +
+                " short");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
@@ -198,3 +200,5 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
     }
 
 }
+
+

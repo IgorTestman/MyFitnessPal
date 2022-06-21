@@ -21,13 +21,13 @@ public class AddFoodTest implements IAbstractTest, IMobileUtils, TextConstants {
     private final String SALAD_CALORIES = "160";
     private final String SALAD_DETAILS = "Asian salad, 1.0 cup";
     private final String MILK_CALORIES = "150";
-    private final String Milk_DETAILS = "D milk, 8.0 oz.";
+    private final String MILK_DETAILS = "D milk, 8.0 oz.";
 
 
     @Test()
     @MethodOwner(owner = "IgorB")
     @TestLabel(name = "Fourth Test", value = {"mobile", "regression"})
-    public void diaryPageTestAddedFoods() {
+    public void diaryPageAddedFoodsTest() {
         SoftAssert softAssert = new SoftAssert();
 
         authorization = new Authorization(getDriver());
@@ -53,7 +53,7 @@ public class AddFoodTest implements IAbstractTest, IMobileUtils, TextConstants {
                 " incorrect");
         softAssert.assertEquals(diaryPage.isCaloriesOfAddedFoodPresent(), MILK_CALORIES, "Calories is" +
                 " incorrect");
-        softAssert.assertEquals(diaryPage.isDetailsOfAddedFoodPresent(), Milk_DETAILS,
+        softAssert.assertEquals(diaryPage.isDetailsOfAddedFoodPresent(), MILK_DETAILS,
                 "Details of added food is incorrect");
         softAssert.assertAll();
 

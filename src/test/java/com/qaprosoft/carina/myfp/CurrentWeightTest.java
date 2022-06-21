@@ -34,6 +34,7 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         MePageBase mePage = (MePageBase) userPage.clickOnOtherTab(UserPageEnum.ME);
         SettingsPageBase settingsPage = mePage.followToSettingsPage();
         MyGoalsPageBase myGoalsPage = settingsPage.clickOnMyGoalsTab();
+        myGoalsPage.typeCurrentRandomWeight("");
         myGoalsPage.typeCurrentWeight(INPUT_CURRENT_WEIGHT);
         softAssert.assertEquals(myGoalsPage.isAlertTextWeightPresent(), ALERT_MESSAGE, "Alert message isn't" +
                 " present");

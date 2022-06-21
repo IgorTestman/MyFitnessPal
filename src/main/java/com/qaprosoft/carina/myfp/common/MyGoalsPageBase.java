@@ -36,4 +36,7 @@ public abstract class MyGoalsPageBase extends AbstractPage {
 
     public abstract void clickOnOtherSetButton();
 
-}
+    public abstract void typeCurrentRandomWeight(String currentRandomWeight);
+
+
+    }

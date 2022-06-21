@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Random;
+
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = MyGoalsPageBase.class)
 public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobileUtils {
 
@@ -129,6 +131,16 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     @Override
     public String getChosenGoalWeightText() {
         return textChosenGoalWeight.getText();
+    }
+    @Override
+    public void typeCurrentRandomWeight(String currentRandomWeight) {
+        clickOnCurrentWeightButton();
+        clickOnYesButton();
+        Random random = new Random();
+        currentRandomWeight = String.valueOf(random.nextInt(1000));
+        typeCurrentWeight.type(currentRandomWeight);
+
+        setButton.click();
     }
 }
 

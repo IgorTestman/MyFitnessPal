@@ -19,25 +19,23 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract boolean isMealTimePresent(String meal);
 
-    public abstract String isAddedFoodPresent();
+    public abstract boolean isAddedFoodPresent();
 
-    public abstract String isMealMacrosPresent();
+    public abstract boolean isMealMacrosPresent();
 
-    public abstract String isNameOfAddedFoodPresent();
+    public abstract boolean isNameOfAddedFoodPresent();
 
-    public abstract String isCaloriesOfAddedFoodPresent();
+    public abstract boolean isCaloriesOfAddedFoodPresent();
 
-    public abstract String isDetailsOfAddedFoodPresent();
+    public abstract boolean isDetailsOfAddedFoodPresent();
 
-    public abstract boolean getAddedMeal(String food);
+    public abstract String  getAddedMealText(String food);
 
-    public abstract boolean getAddedFoodName();
+    public abstract String getAddedFoodNameText();
 
-    public abstract boolean getAddedFoodCalories();
+    public abstract String getAddedFoodCaloriesText();
 
-    public abstract boolean getAddedFoodDetails();
-
-    public abstract boolean getMeal();
+    public abstract String getAddedFoodDetailsText();
 
     public abstract DiarySettingsPageBase clickOnOptions(ViewOptionsDiaryEnum options);
 
@@ -51,14 +49,12 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract void enterTime();
 
-    public abstract String getAddedTimeStamps();
+    public abstract String getAddedTimeStampsText();
 
-    public abstract boolean currentTime();
-
-    public abstract String clickOnPmButton();
-
-    public abstract String isTimeStampPresent();
+    public abstract String getTimeStampsText();
 
     public abstract MealPageBase clickOnAddFoodButton(DiaryEnum diary);
+
+    public abstract void selectTimeFormat(String format);
 
     }
