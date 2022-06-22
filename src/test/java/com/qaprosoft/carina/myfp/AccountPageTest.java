@@ -36,7 +36,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
         AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnPopUp();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.isNameOfAddedFoodPresent(), "Salad", "Name of food is " +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Salad", "Name of food is " +
                 "incorrect");
         softAssert.assertAll();
     }

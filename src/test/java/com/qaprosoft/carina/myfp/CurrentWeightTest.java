@@ -5,10 +5,7 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.myfp.common.*;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
-import com.qaprosoft.carina.myfp.utils.enums.ActivityLevel;
-import com.qaprosoft.carina.myfp.utils.enums.Goals;
-import com.qaprosoft.carina.myfp.utils.enums.Settings;
-import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
+import com.qaprosoft.carina.myfp.utils.enums.*;
 import com.qaprosoft.carina.myfp.utils.services.Authorization;
 import com.qaprosoft.carina.myfp.utils.services.SignUp;
 import com.zebrunner.agent.core.annotation.TestLabel;
@@ -16,16 +13,18 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Random;
+
 
 public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConstants {
     private static Authorization authorization;
     private static SignUp signUp;
-    private final String CHOSEN_CURRENT_WEIGHT= "998 lbs";
+    private final double CHOSEN_CURRENT_WEIGHT= 998.0;
     private final String CHOSEN_GOAL_WEIGHT= "1,000 lbs";
-    private final String INPUT_MAX_CURRENT_WEIGHT = "999";
+    private final double INPUT_MAX_CURRENT_WEIGHT = 999.9;
     private final String ERROR_MESSAGE = "Please enter a valid weight";
     private final String ALERT_MESSAGE = "Please enter your current weight.";
-
+    int randomWeight = new Random().nextInt(1000);
     @Test()
     @MethodOwner(owner = "IgorB")
     @TestLabel(name = "Five Test", value = {"mobile", "regression"})
@@ -36,23 +35,29 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         UserPageBase userPage = authorization.logIn();
         MePageBase mePage = (MePageBase) userPage.clickOnOtherTab(UserPageEnum.ME);
         SettingsPageBase settingsPage = mePage.followToSettingsPage();
-        MyGoalsPageBase myGoalsPage = settingsPage.clickOnTab(Settings.MY_GOALS);
-        myGoalsPage.clickOnWeightButton(Goals.CURRENT_WEIGHT);
-        myGoalsPage.typeRandomWeight(1000);
-        myGoalsPage.clickOnWeightButton(Goals.CURRENT_WEIGHT);
+        MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.isPageOpened(Settings.MY_GOALS);
+        myGoalsPage.clickOnWeightButton(MyGoalsEnum.CURRENT_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.YES);
+        myGoalsPage.typeRandomWeight(randomWeight);
+        myGoalsPage.clickOnButton(MyGoalsEnum.SET);
+        myGoalsPage.clickOnWeightButton(MyGoalsEnum.CURRENT_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.YES);
         myGoalsPage.typeCurrentWeight(INPUT_MAX_CURRENT_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.SET);
         softAssert.assertEquals(myGoalsPage.isAlertTextWeightPresent(), ALERT_MESSAGE, "Alert message isn't" +
                 " present");
-        myGoalsPage.clickOnDismissButton();
-        myGoalsPage.clickOnWeightButton(Goals.CURRENT_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.DISMISS);
+        myGoalsPage.clickOnWeightButton(MyGoalsEnum.CURRENT_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.YES);
         myGoalsPage.typeCurrentWeight(CHOSEN_CURRENT_WEIGHT);
-        softAssert.assertTrue(myGoalsPage.getChosenWeightText(Goals.CHOSEN_CURRENT_WEIGHT.getName()),
+        myGoalsPage.clickOnButton(MyGoalsEnum.SET);
+        softAssert.assertTrue(myGoalsPage.isEnteredWeightPresent(MyGoalsEnum.CHOSEN_CURRENT_WEIGHT.getName()),
                 "Current weight is incorrect");
-        myGoalsPage.clickOnWeightButton(Goals.GOAL_WEIGHT);
-        myGoalsPage.clickOnYesButton();
-        softAssert.assertTrue(myGoalsPage.isMaxGoalWeightPresent());
-        myGoalsPage.clickOnYesButton();
-        softAssert.assertTrue(myGoalsPage.getChosenGoalWeightText(Goals.CHOSEN_GOAL_WEIGHT.getName()),
+        myGoalsPage.clickOnWeightButton(MyGoalsEnum.GOAL_WEIGHT);
+        myGoalsPage.clickOnButton(MyGoalsEnum.YES);
+        softAssert.assertTrue(myGoalsPage.isMaxGoalWeightPresent("1000"));
+        myGoalsPage.clickOnButton(MyGoalsEnum.SET);
+        softAssert.assertTrue(myGoalsPage.isEnteredGoalWeightPresent(MyGoalsEnum.CHOSEN_GOAL_WEIGHT.getName()),
                 "Goal weight is incorrect");
 
         softAssert.assertAll();

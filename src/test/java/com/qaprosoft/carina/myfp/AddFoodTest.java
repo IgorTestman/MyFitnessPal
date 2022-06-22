@@ -38,22 +38,22 @@ public class AddFoodTest implements IAbstractTest, IMobileUtils, TextConstants {
         AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnPopUp();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.isNameOfAddedFoodPresent(), "Salad", "Name of food is " +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Salad", "Name of food is " +
                 "incorrect");
-        softAssert.assertEquals(diaryPage.isCaloriesOfAddedFoodPresent(), SALAD_CALORIES, "Calories is " +
+        softAssert.assertEquals(diaryPage.getCaloriesOfAddedFood(), SALAD_CALORIES, "Calories is " +
                 "incorrect");
-        softAssert.assertEquals(diaryPage.isDetailsOfAddedFoodPresent(), SALAD_DETAILS,"Details of added " +
+        softAssert.assertEquals(diaryPage.getAddedFoodDetailsText(), SALAD_DETAILS,"Details of added " +
                 "food is incorrect");
         diaryPage.clickOnAddFoodButton(DiaryEnum.DINNER);
         mealPage.addFood(MILK);
         addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnFeatureHighlightButton();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.isNameOfAddedFoodPresent(), "Milk", "Name of food is" +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Milk", "Name of food is" +
                 " incorrect");
-        softAssert.assertEquals(diaryPage.isCaloriesOfAddedFoodPresent(), MILK_CALORIES, "Calories is" +
+        softAssert.assertEquals(diaryPage.getCaloriesOfAddedFood(), MILK_CALORIES, "Calories is" +
                 " incorrect");
-        softAssert.assertEquals(diaryPage.isDetailsOfAddedFoodPresent(), MILK_DETAILS,
+        softAssert.assertEquals(diaryPage.getAddedFoodDetailsText(), MILK_DETAILS,
                 "Details of added food is incorrect");
         softAssert.assertAll();
 

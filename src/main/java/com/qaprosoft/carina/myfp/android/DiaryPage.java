@@ -117,18 +117,18 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public boolean isNameOfAddedFoodPresent() {
-        return textItemDescription.isElementPresent();
+    public String getNameOfAddedFood() {
+        return textItemDescription.getText();
     }
 
     @Override
-    public boolean isCaloriesOfAddedFoodPresent() {
-        return textCalories.isElementPresent();
+    public String getCaloriesOfAddedFood() {
+        return textCalories.getText();
     }
 
     @Override
-    public boolean isDetailsOfAddedFoodPresent() {
-        return textItemDetails.isElementPresent();
+    public String getDetailsOfAddedFood() {
+        return textItemDetails.getText();
     }
 
     @Override
@@ -213,7 +213,9 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     public void selectTimeFormat(String format) {
         if (amButton.isChecked()) {
             timeFormatButton.format(format).click();
-
+        }
+        else if (pmButton.isChecked()) {
+            timeFormatButton.format(format).click();
         }
     }
 }

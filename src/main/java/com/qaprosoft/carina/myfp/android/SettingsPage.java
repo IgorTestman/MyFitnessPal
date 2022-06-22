@@ -2,12 +2,12 @@ package com.qaprosoft.carina.myfp.android;
 
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.common.MePageBase;
 import com.qaprosoft.carina.myfp.common.MyGoalsPageBase;
 import com.qaprosoft.carina.myfp.common.SettingsPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import com.qaprosoft.carina.myfp.utils.enums.Settings;
-import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -23,7 +23,7 @@ public class SettingsPage extends SettingsPageBase implements TimeConstants {
     private ExtendedWebElement myGoalsTab;
 
     @Override
-    public MyGoalsPageBase clickOnTab(Settings tab) {
+    public MyGoalsPageBase isPageOpened(Settings tab) {
         myGoalsTab.format(tab.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), MyGoalsPageBase.class);
     }
