@@ -2,8 +2,6 @@ package com.qaprosoft.carina.myfp.android;
 
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
-import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.myfp.common.MePageBase;
 import com.qaprosoft.carina.myfp.common.MyGoalsPageBase;
 import com.qaprosoft.carina.myfp.common.SettingsPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
@@ -18,13 +16,12 @@ public class SettingsPage extends SettingsPageBase implements TimeConstants {
         super(driver);
     }
 
-    // * edited correct implementation of method
     @FindBy(id = "com.myfitnesspal.android:id/textMyGoals")
-    private ExtendedWebElement myGoalsTab;
+    private ExtendedWebElement itemByText;
 
     @Override
-    public MyGoalsPageBase isPageOpened(Settings tab) {
-        myGoalsTab.format(tab.getName()).click(THREE_SECONDS);
+    public MyGoalsPageBase openPageByName(Settings page) {
+        itemByText.format(page.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), MyGoalsPageBase.class);
     }
 

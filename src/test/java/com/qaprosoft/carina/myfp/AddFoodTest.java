@@ -38,7 +38,7 @@ public class AddFoodTest implements IAbstractTest, IMobileUtils, TextConstants {
         AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnPopUp();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Salad", "Name of food is " +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), SALAD, "Name of food is " +
                 "incorrect");
         softAssert.assertEquals(diaryPage.getCaloriesOfAddedFood(), SALAD_CALORIES, "Calories is " +
                 "incorrect");
@@ -49,7 +49,7 @@ public class AddFoodTest implements IAbstractTest, IMobileUtils, TextConstants {
         addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnFeatureHighlightButton();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Milk", "Name of food is" +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), MILK, "Name of food is" +
                 " incorrect");
         softAssert.assertEquals(diaryPage.getCaloriesOfAddedFood(), MILK_CALORIES, "Calories is" +
                 " incorrect");

@@ -44,8 +44,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     private ExtendedWebElement currentWeightButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_one")
-
     private ExtendedWebElement entryFirstValue;
+
+    @FindBy(id = "com.myfitnesspal.android:id/current_weight")
+    private ExtendedWebElement enteredCurrentWeight;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_two")
     private ExtendedWebElement entrySecondValue;
@@ -128,7 +130,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeWeight(String value) {
+    public void typeWeight(double value) {
         entryFirstValue.type(String.valueOf(value));
         clickOnSetButton();
     }
@@ -182,11 +184,13 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     public String isInputFirstHeightPresent() {
         return entryFirstValue.getText();
     }
-    //* I hope I did it wright
+
     @Override
-    public String isInputValuePresent() {
-        return String.valueOf(currentWeightButton.getText());
-    }
+    public int isInputValuePresent(String value) {
+        String newString = enteredCurrentWeight.format(value).getText();
+        String[] newString2 = newString.split("\\D+");
+        return Integer.parseInt(String.join("", newString2));
+   }
 
     @Override
     public String isInputSecondHeightPresent() {

@@ -5,8 +5,8 @@ import com.qaprosoft.carina.core.foundation.report.testrail.TestRailCases;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.myfp.common.*;
-import com.qaprosoft.carina.myfp.utils.enums.ActivityLevel;
-import com.qaprosoft.carina.myfp.utils.enums.Goals;
+import com.qaprosoft.carina.myfp.utils.enums.ActivityLevelEnum;
+import com.qaprosoft.carina.myfp.utils.enums.GoalsEnum;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.enums.YouPage;
 import com.zebrunner.agent.core.annotation.TestLabel;
@@ -25,36 +25,36 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         StartPageBase startPage = initPage(getDriver(), StartPageBase.class);
         SignUpPageBase signUpPage = startPage.clickOnSignUpButton();
         GoalsPageBase goalsPage = signUpPage.clickOnContinueButton();
-        goalsPage.clickOnButton(Goals.LOSE_WEIGHT);
-        Assert.assertTrue(goalsPage.isButtonActive(Goals.LOSE_WEIGHT.getName()),
+        goalsPage.clickOnButton(GoalsEnum.LOSE_WEIGHT);
+        Assert.assertTrue(goalsPage.isButtonActive(GoalsEnum.LOSE_WEIGHT.getName()),
                 "Lose Weight button isn't selected");
-        goalsPage.clickOnButton(Goals.MODIFY_MY_DIET);
-        Assert.assertTrue(goalsPage.isButtonActive(Goals.MODIFY_MY_DIET.getName()),
+        goalsPage.clickOnButton(GoalsEnum.MODIFY_MY_DIET);
+        Assert.assertTrue(goalsPage.isButtonActive(GoalsEnum.MODIFY_MY_DIET.getName()),
                 "Modify My diet button isn't selected");
         goalsPage.clickOnNextButton();
         goalsPage.clickOnNextButton();
-        goalsPage.clickOnButton(Goals.LACK_OF_TIME);
-        Assert.assertTrue(goalsPage.isButtonActive(Goals.LACK_OF_TIME.getName()),
+        goalsPage.clickOnButton(GoalsEnum.LACK_OF_TIME);
+        Assert.assertTrue(goalsPage.isButtonActive(GoalsEnum.LACK_OF_TIME.getName()),
                 "Lack of time button isn't selected");
         Assert.assertTrue(goalsPage.isAchieveOfResultPageOpened(), "Achieve page isn't opened");
         goalsPage.clickOnNextButton();
         Assert.assertTrue(goalsPage.isHelpToLookYouWantPageOpened(), "Recommended help page isn't opened");
         goalsPage.clickOnNextButton();
-        goalsPage.clickOnButton(Goals.LESS_SUGAR);
-        Assert.assertTrue(goalsPage.isButtonActive(Goals.LESS_SUGAR.getName()),
+        goalsPage.clickOnButton(GoalsEnum.LESS_SUGAR);
+        Assert.assertTrue(goalsPage.isButtonActive(GoalsEnum.LESS_SUGAR.getName()),
                 "'Less sugar' button isn't selected");
         goalsPage.clickOnNextButton();
         Assert.assertTrue(goalsPage.isMoreDetailsPageOpened(), "More Details page isn't opened");
         ActivityLevelPageBase activityLevelPage = goalsPage.clickOnNextButton();
 
         //*TC #2 (Verify ability to switch the Activity Level)
-        YouPageBase youPage = activityLevelPage.selectActivity(ActivityLevel.VERY_ACTIVE);
+        YouPageBase youPage = activityLevelPage.selectActivity(ActivityLevelEnum.VERY_ACTIVE);
         youPage.clickOnBackButton();
-        Assert.assertTrue(activityLevelPage.isButtonActive(ActivityLevel.VERY_ACTIVE.getName()),
+        Assert.assertTrue(activityLevelPage.isButtonActive(ActivityLevelEnum.VERY_ACTIVE.getName()),
                 "Very Active level button isn't selected");
-        youPage = activityLevelPage.selectActivity(ActivityLevel.ACTIVE);
+        youPage = activityLevelPage.selectActivity(ActivityLevelEnum.ACTIVE);
         youPage.clickOnBackButton();
-        Assert.assertTrue(activityLevelPage.isButtonActive(ActivityLevel.ACTIVE.getName()),
+        Assert.assertTrue(activityLevelPage.isButtonActive(ActivityLevelEnum.ACTIVE.getName()),
                 "Active level button isn't selected");
         activityLevelPage.clickOnNextButton();
 
@@ -98,7 +98,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         youPage.clickOnWeightButton();
         youPage.typeWeight(30.0);
         ///////////////* parsing String to int...
-        Assert.assertEquals(youPage.isInputValuePresent(), 30 + " lbs", "Weight is incorrect");
+        Assert.assertEquals(youPage.isInputValuePresent("30 lbs"), 30, "Weight is incorrect");
         youPage.clickOnWeightButton();
         youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
@@ -109,7 +109,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
                 "Weight unit is not selected");
         youPage.typeWeight(400.0);
-        Assert.assertEquals(youPage.isInputValuePresent(), "400 kg", "Weight is incorrect");
+        Assert.assertEquals(youPage.isInputValuePresent("400 kg"), 400, "Weight is incorrect");
         //////youPage.clickOnSetButton();
 
         //*TC #8 (Verify input values in Goal Weight)

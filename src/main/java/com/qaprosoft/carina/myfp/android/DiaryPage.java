@@ -10,10 +10,12 @@ import com.qaprosoft.carina.myfp.common.DiaryPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
-import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
+import com.qaprosoft.carina.myfp.utils.enums.TimeStampEnum;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+
+import static com.qaprosoft.carina.myfp.utils.constants.TextConstants.NINE_HOUR;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DiaryPageBase.class)
 public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUtils, TextConstants {
@@ -108,12 +110,12 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
 
     @Override
     public boolean isAddedFoodPresent() {
-        return foodName.isElementPresent();
+        return foodName.isElementPresent(THREE_SECONDS);
     }
 
     @Override
     public boolean isMealMacrosPresent() {
-        return mealMacros.isElementPresent();
+        return mealMacros.isElementPresent(THREE_SECONDS);
     }
 
     @Override
@@ -165,7 +167,7 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public AbstractPage selectEditTimeStamp(TimeStamp timeStamp) {
+    public AbstractPage selectEditTimeStamp(TimeStampEnum timeStamp) {
         editTime.format(timeStamp.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), timeStamp.getPageClass());
 
@@ -175,19 +177,20 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     public void enterTime() {
         keyBoardButton.click();
         selectHours.click();
-        typeHours("9");
+        typeHours(NINE_HOUR);
         selectMinutes.click();
-        typeMinutes("15");
+        typeMinutes(FIFTEEN_MINUTES);
+        selectTimeFormat();
         okTimeButton.click();
     }
 
     @Override
-    public void typeHours(String hours) {
+    public void typeHours(int hours) {
         inputTime.type(String.valueOf(hours));
     }
 
     @Override
-    public void typeMinutes(String minutes) {
+    public void typeMinutes(int minutes) {
         inputTime.type(String.valueOf(minutes));
     }
 
@@ -208,14 +211,13 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
         return initPage(getDriver(), MealPageBase.class);
     }
 
-    //* edited name of method
     @Override
-    public void selectTimeFormat(String format) {
+    public void selectTimeFormat() {
         if (amButton.isChecked()) {
-            timeFormatButton.format(format).click();
+            timeFormatButton.format(PM).click();
         }
         else if (pmButton.isChecked()) {
-            timeFormatButton.format(format).click();
+            timeFormatButton.format(AM).click();
         }
     }
 }
