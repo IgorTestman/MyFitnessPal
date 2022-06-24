@@ -176,17 +176,17 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public String isInputAgePresent() {
+    public String getInputAge() {
         return birthDateField.getText();
     }
 
     @Override
-    public String isInputFirstHeightPresent() {
+    public String getInputFirstHeight() {
         return entryFirstValue.getText();
     }
 
     @Override
-    public int isInputValuePresent(String value) {
+    public int getInputValue(String value) {
         String newString = enteredCurrentWeight.format(value).getText();
         String[] newString2 = newString.split("\\D+");
         return Integer.parseInt(String.join("", newString2));

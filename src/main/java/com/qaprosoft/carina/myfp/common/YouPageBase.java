@@ -32,7 +32,7 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void clickOnSetButton();
 
-    public abstract void typeWeight(String value);
+    public abstract void typeWeight(double value);
 
     public abstract AbstractPage selectHeightUnitFromDropdown(YouPage height);
 
@@ -48,15 +48,19 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void typeHeightInCentimeters(String height);
 
-    public abstract String isInputAgePresent();
+    public abstract String getInputAge();
 
-    public abstract String isInputFirstHeightPresent();
+    public abstract String getInputFirstHeight();
 
     public abstract String isInputSecondHeightPresent();
 
-    public abstract String isInputValuePresent();
+    public abstract int getInputValue(String value);
 
-}
+    public abstract void inputValues();
+
+    public abstract String errorMessageIsPresent();
+
+    }
 
 
 

@@ -66,7 +66,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
 
         //*TC #4 (Verify valid age values)
         youPage.typeAge("64");
-        Assert.assertEquals(youPage.isInputAgePresent(), "64", "Age is incorrect");
+        Assert.assertEquals(youPage.getInputAge(), "64", "Age is incorrect");
 
         //*TC #5 (Verify location address via dropdown)
         youPage.selectCountryFromDropdown(YouPage.ZAMBIA);
@@ -77,7 +77,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         //* 6.1 (Verify input values in Feet Inches)
         youPage.clickOnHeightButton();
         youPage.typeFirstHeight("5");
-        Assert.assertEquals(youPage.isInputFirstHeightPresent(), "5", "First height is wrong");
+        Assert.assertEquals(youPage.getInputFirstHeight(), "5", "First height is wrong");
         youPage.typeSecondHeight("6");
         Assert.assertEquals(youPage.isInputSecondHeightPresent(), "6", "Second height is wrong");
         youPage.selectHeightUnitFromDropdown(YouPage.FEET_INCHES);
@@ -89,7 +89,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(youPage.isHeightUnitSelected(YouPage.CENTIMETERS.getName()),
                 "Units in centimeters are not selected");
         youPage.typeHeightInCentimeters("200");
-        Assert.assertEquals(youPage.isInputFirstHeightPresent(),
+        Assert.assertEquals(youPage.getInputFirstHeight(),
                 "200", "Height in centimeters is wrong");
         youPage.clickOnSetButton();
 
@@ -98,7 +98,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         youPage.clickOnWeightButton();
         youPage.typeWeight(30.0);
         ///////////////* parsing String to int...
-        Assert.assertEquals(youPage.isInputValuePresent("30 lbs"), 30, "Weight is incorrect");
+        Assert.assertEquals(youPage.getInputValue("30 lbs"), 30, "Weight is incorrect");
         youPage.clickOnWeightButton();
         youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
@@ -109,14 +109,14 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
                 "Weight unit is not selected");
         youPage.typeWeight(400.0);
-        Assert.assertEquals(youPage.isInputValuePresent("400 kg"), 400, "Weight is incorrect");
+        Assert.assertEquals(youPage.getInputValue("400 kg"), 400, "Weight is incorrect");
         //////youPage.clickOnSetButton();
 
         //*TC #8 (Verify input values in Goal Weight)
         //* #8.1 (Verify input values in 'Kilograms')
         WeeklyGoalPageBase weeklyGoalPage = youPage.followToGoalWeight();
         weeklyGoalPage.typeWeight("400");
-        Assert.assertEquals(weeklyGoalPage.isInputWeightPresent(),
+        Assert.assertEquals(weeklyGoalPage.getInputWeightText(),
                 "400", "Weight value is incorrect");
         weeklyGoalPage.selectWeightUnitFromDropdown(YouPage.KILOGRAMS);
         Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
@@ -138,7 +138,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
                 "Weekly Goal Weight in Pounds unit is not selected");
         weeklyGoalPage.typeWeightAgain("170");
-        Assert.assertEquals(weeklyGoalPage.isInputWeightPresent(),
+        Assert.assertEquals(weeklyGoalPage.getInputWeightText(),
                 "170", "Pounds Weight is incorrect");
         weeklyGoalPage.clickOnSetButton();
 
@@ -155,38 +155,38 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         //*TC #10 (Verify that password can include any category of symbols)
         CreateAccountPageBase createAccountPage = weeklyGoalPage.followToCreateAccountPage();
         createAccountPage.typePassword(VALUE_MIX);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), VALUE_MIX, "Password is incorrect");
+        Assert.assertEquals(createAccountPage.getPassword(), VALUE_MIX, "Password is incorrect");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
 
         createAccountPage.typePassword(LOWER_CASE_LETTERS);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), LOWER_CASE_LETTERS, "Password is incorrect");
+        Assert.assertEquals(createAccountPage.getPassword(), LOWER_CASE_LETTERS, "Password is incorrect");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
 
         createAccountPage.typePassword(UPPER_CASE_LETTERS);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), UPPER_CASE_LETTERS, "Password is incorrect");
+        Assert.assertEquals(createAccountPage.getPassword(), UPPER_CASE_LETTERS, "Password is incorrect");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
 
         createAccountPage.typePassword(DIGITS);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), DIGITS, "Password is incorrect");
+        Assert.assertEquals(createAccountPage.getPassword(), DIGITS, "Password is incorrect");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
 
         createAccountPage.typePassword(SIGNS);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), SIGNS, "Password is incorrect");
+        Assert.assertEquals(createAccountPage.getPassword(), SIGNS, "Password is incorrect");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();
 
         //*TC #11 (Verify that password can include less than 10 characters)
         createAccountPage.typePassword(TOO_SHORT_PASSWORD);
-        Assert.assertEquals(createAccountPage.inputPasswordPresent(), TOO_SHORT_PASSWORD, "Password is too" +
+        Assert.assertEquals(createAccountPage.getPassword(), TOO_SHORT_PASSWORD, "Password is too" +
                 " short");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
@@ -194,7 +194,7 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
 
         //*TC #12 (Verify that email can include wrong format)
         createAccountPage.typeEmail(INVALID_EMAIL);
-        Assert.assertEquals(createAccountPage.inputEmailPresent(), INVALID_EMAIL, "Email has a wrong format");
+        Assert.assertEquals(createAccountPage.getEmail(), INVALID_EMAIL, "Email has a wrong format");
         createAccountPage.clickOnSignUpButton();
         Assert.assertTrue(createAccountPage.isErrorMessagePresent(), "Error message is not shown");
         createAccountPage.clickOnOkButton();

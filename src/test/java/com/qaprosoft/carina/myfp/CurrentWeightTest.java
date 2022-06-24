@@ -36,7 +36,7 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         myGoalsPage.typeRandomWeight(randomWeight);
         myGoalsPage.clickOnWeightButton(MyGoalsEnum.CURRENT_WEIGHT);
         myGoalsPage.typeRandomWeight(MAX_CURRENT_WEIGHT);
-        softAssert.assertEquals(myGoalsPage.isAlertTextWeightPresent(), ALERT_MESSAGE, "Alert message isn't" +
+        softAssert.assertEquals(myGoalsPage.getAlertTitle(), ALERT_MESSAGE, "Alert message isn't" +
                 " present");
         myGoalsPage.clickOnButtonByName(DISMISS);
         myGoalsPage.clickOnWeightButton(MyGoalsEnum.CURRENT_WEIGHT);

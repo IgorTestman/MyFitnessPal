@@ -6,7 +6,7 @@ import com.qaprosoft.carina.core.foundation.utils.ownership.MethodOwner;
 import com.qaprosoft.carina.myfp.common.*;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
-import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
+import com.qaprosoft.carina.myfp.utils.enums.TimeStampEnum;
 import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import com.qaprosoft.carina.myfp.utils.services.Authorization;
@@ -36,7 +36,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
         AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
         addFoodPage.clickOnPopUp();
         diaryPage = addFoodPage.clickOnSaveButton();
-        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), "Salad", "Name of food is " +
+        softAssert.assertEquals(diaryPage.getNameOfAddedFood(), SALAD, "Name of food is " +
                 "incorrect");
         softAssert.assertAll();
     }
@@ -57,9 +57,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
         diaryPage = diarySettings.clickOnBackButton();
         softAssert.assertEquals(diaryPage.getTimeStampsText(), NO_TIME, "Time stamp isn't present");
         diaryPage.clickOnTimeStamp();
-        diaryPage.selectEditTimeStamp(TimeStamp.EDIT_TIME);
-        diaryPage.selectTimeFormat("PM");
-        diaryPage.enterTime();
+        diaryPage.selectEditTimeStamp(TimeStampEnum.EDIT_TIME);
         softAssert.assertEquals(diaryPage.getAddedTimeStampsText(), EXPECTED_TIME, "Time is wrong");
         softAssert.assertAll();
     }

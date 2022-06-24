@@ -1,8 +1,6 @@
 package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
-import com.qaprosoft.carina.myfp.utils.enums.Goals;
 import com.qaprosoft.carina.myfp.utils.enums.MyGoalsEnum;
 import org.openqa.selenium.WebDriver;
 
@@ -11,26 +9,18 @@ public abstract class MyGoalsPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void typeCurrentWeight(double currentWeight);
+    public abstract String getAlertTitle();
 
-    public abstract void clickOnSetButton();
-
-    public abstract String isAlertTextWeightPresent();
-
-    public abstract void clickOnDismissButton();
-
-    public abstract String isAlertTextPresent();
+    public abstract String getAlertText();
 
     public abstract boolean isEnteredWeightPresent(String weight);
 
-    public abstract boolean isEnteredGoalWeightPresent(String goalWeight);
-
     public abstract AbstractPage clickOnWeightButton(MyGoalsEnum weight);
 
-    public abstract int typeRandomWeight(int randomWeight);
+    public abstract double typeRandomWeight(double randomWeight);
 
-    public abstract boolean isMaxGoalWeightPresent(String value);
+    public abstract boolean isMaxGoalWeightPresent(int value);
 
-    public abstract AbstractPage clickOnButton(MyGoalsEnum buttons);
+    public abstract void clickOnButtonByName(String buttons);
 
     }

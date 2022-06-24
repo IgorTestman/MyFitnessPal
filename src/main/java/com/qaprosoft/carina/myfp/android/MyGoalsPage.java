@@ -18,7 +18,6 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
         super(driver);
     }
 
-
     @FindBy(xpath = "//android.widget.TextView[@text='%s']")
     private ExtendedWebElement itemByName;
 
@@ -42,13 +41,13 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
 
 
     @Override
-    public String isAlertTextWeightPresent() {
+    public String getAlertTitle() {
         alertTitleText.isElementPresent(THREE_SECONDS);
         return alertTitle.getText();
     }
 
     @Override
-    public String isAlertTextPresent() {
+    public String getAlertText() {
         return alertTitleText.getText();
     }
 
@@ -64,14 +63,14 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     }
 
     @Override
-    public String typeRandomWeight(double randomWeight) {
+    public double typeRandomWeight(double randomWeight) {
         clickOnButtonByName(YES);
         inputCurrentWeightField.type(String.valueOf(randomWeight));
         clickOnButtonByName(SET);
         if (randomWeight<=1500 && randomWeight>=999) {
-            return isAlertTextPresent();
+            return Double.parseDouble(getAlertText());
         }
-        return String.valueOf(randomWeight);
+        return (randomWeight);
     }
 
 
