@@ -15,12 +15,16 @@ public abstract class MyGoalsPageBase extends AbstractPage {
 
     public abstract boolean isEnteredWeightPresent(String weight);
 
-    public abstract AbstractPage clickOnWeightButton(MyGoalsEnum weight);
+    public abstract AbstractPage setWeightButton(MyGoalsEnum weight);
 
-    public abstract double typeRandomWeight(double randomWeight);
+    public abstract MyGoalsPageBase setCurrentWeight(double randomWeight);
 
-    public abstract boolean isMaxGoalWeightPresent(int value);
+    public abstract MyGoalsPageBase setGoalWeight(double value);
 
     public abstract void clickOnButtonByName(String buttons);
+
+    public abstract double getCurrentWeight(String value);
+
+    public abstract double getGoalWeight(String value);
 
     }

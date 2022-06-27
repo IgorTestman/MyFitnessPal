@@ -39,6 +39,8 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     @FindBy(xpath = "//android.widget.EditText[@text='%s']")
     private ExtendedWebElement inputNumberPickerField;
 
+    @FindBy(xpath = "//*[@text = '%s']/parent::*/parent::*/parent::*//*[contains(@resource-id, 'id/text')]")
+    private ExtendedWebElement valueWeight;
 
     @Override
     public String getAlertTitle() {
@@ -56,33 +58,50 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
         return itemByName.format(weight).isElementPresent(THREE_SECONDS);
     }
 
+// * openWeightMenu
     @Override
-    public MyGoalsPageBase clickOnWeightButton(MyGoalsEnum weight) {
+    public MyGoalsPageBase setWeightButton(MyGoalsEnum weight) {
         itemByName.format(weight.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), MyGoalsPageBase.class);
     }
 
     @Override
-    public double typeRandomWeight(double randomWeight) {
+    public MyGoalsPageBase setCurrentWeight(double currentWeight) {
+        itemByName.format(MyGoalsEnum.CURRENT_WEIGHT.getName()).click(THREE_SECONDS);
         clickOnButtonByName(YES);
-        inputCurrentWeightField.type(String.valueOf(randomWeight));
+        inputCurrentWeightField.type(String.valueOf(currentWeight));
         clickOnButtonByName(SET);
-        if (randomWeight<=1500 && randomWeight>=999) {
-            return Double.parseDouble(getAlertText());
-        }
-        return (randomWeight);
+        return initPage(getDriver(), MyGoalsPageBase.class);
     }
 
 
     @Override
-    public boolean isMaxGoalWeightPresent(int value) {
+    public MyGoalsPageBase setGoalWeight(double value) {
+        itemByName.format(MyGoalsEnum.GOAL_WEIGHT.getName()).click(THREE_SECONDS);
+        clickOnButtonByName(YES);
         ExtendedWebElement maxValue = inputNumberPickerField.format(value);
-        return swipe(maxValue, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
+        swipe(maxValue, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
+        clickOnButtonByName(SET);
+        return initPage(getDriver(), MyGoalsPageBase.class);
     }
 
     @Override
     public void clickOnButtonByName(String buttons) {
-         buttonByName.format(buttons).click();
+        buttonByName.format(buttons).click();
 
+    }
+
+    @Override
+    public double getCurrentWeight(String value) {
+        String parseValue = valueWeight.format(MyGoalsEnum.CURRENT_WEIGHT.getName()).getText();
+        String[] parseNewValue = parseValue.split("\\D+");
+        return Double.parseDouble(String.join(".", parseNewValue));
+    }
+
+    @Override
+    public double getGoalWeight(String value) {
+        String parseValue = valueWeight.format(MyGoalsEnum.GOAL_WEIGHT.getName()).getText();
+        String[] parseNewValue = parseValue.split("\\D+");
+        return Double.parseDouble(String.join(".", parseNewValue));
     }
 }
