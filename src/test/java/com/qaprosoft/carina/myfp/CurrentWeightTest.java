@@ -30,7 +30,7 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         int randomWeight = new Random().nextInt(889)+122;
         authorization = new Authorization(getDriver());
         UserPageBase userPage = authorization.logIn();
-        MePageBase mePage = (MePageBase) userPage.clickOnOtherTab(UserPageEnum.ME);
+        MePageBase mePage = (MePageBase) userPage.clickOnTab(UserPageEnum.ME);
         SettingsPageBase settingsPage = mePage.followToSettingsPage();
         MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.openPageByName(Settings.MY_GOALS);
         myGoalsPage.setCurrentWeight(randomWeight);
@@ -39,12 +39,10 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
                 " present");
         myGoalsPage.clickOnButtonByName(DISMISS);
         myGoalsPage.setCurrentWeight(CURRENT_WEIGHT_IN_LB);
-        softAssert.assertEquals(myGoalsPage.getCurrentWeight(CHOSEN_CURRENT_WEIGHT_IN_LB), CURRENT_WEIGHT_IN_LB,
+        softAssert.assertEquals(myGoalsPage.getCurrentWeight(), CURRENT_WEIGHT_IN_LB,
                 "Current weight is incorrect");
         myGoalsPage.setGoalWeight(MAX_GOAL_WEIGHT_IN_LB);
-        softAssert.assertEquals(myGoalsPage.getGoalWeight(CHOSEN_MAX_GOAL_WEIGHT_IN_LB), MAX_WEIGHT_IN_LB, "Max weight is incorrect");
-        softAssert.assertTrue(myGoalsPage.isEnteredWeightPresent(CHOSEN_MAX_GOAL_WEIGHT_IN_LB),
-                "Goal weight is incorrect");
+        softAssert.assertEquals(myGoalsPage.getGoalWeight(), MAX_WEIGHT_IN_LB, "Max weight is incorrect");
 
         softAssert.assertAll();
     }
@@ -77,7 +75,7 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         double randomWeight = new Random().nextInt(423) + 30.0;
         authorization = new Authorization(getDriver());
         UserPageBase userPage = authorization.logIn();
-        MePageBase mePage = (MePageBase) userPage.clickOnOtherTab(UserPageEnum.ME);
+        MePageBase mePage = (MePageBase) userPage.clickOnTab(UserPageEnum.ME);
         SettingsPageBase settingsPage = mePage.followToSettingsPage();
         MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.openPageByName(Settings.MY_GOALS);
         myGoalsPage.setCurrentWeight(randomWeight);
@@ -86,12 +84,10 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
                 " present");
         myGoalsPage.clickOnButtonByName(DISMISS);
         myGoalsPage.setCurrentWeight(CURRENT_WEIGHT_IN_KG);
-        Assert.assertEquals(myGoalsPage.getCurrentWeight(CHOSEN_CURRENT_WEIGHT_IN_KG), CURRENT_WEIGHT_IN_KG,
+        softAssert.assertEquals(myGoalsPage.getCurrentWeight(), CURRENT_WEIGHT_IN_KG,
                 "Current weight is incorrect");
         myGoalsPage.setGoalWeight(MAX_GOAL_WEIGHT_IN_KG);
-        Assert.assertEquals(myGoalsPage.getGoalWeight(CHOSEN_MAX_GOAL_WEIGHT_IN_KG), MAX_WEIGHT_IN_KG, "Max weight is incorrect");
-        Assert.assertTrue(myGoalsPage.isEnteredWeightPresent(CHOSEN_MAX_GOAL_WEIGHT_IN_KG),
-                "Goal weight is incorrect");
+        softAssert.assertEquals(myGoalsPage.getGoalWeight(), MAX_GOAL_WEIGHT_IN_KG, "Max weight is incorrect");
 
         softAssert.assertAll();
     }

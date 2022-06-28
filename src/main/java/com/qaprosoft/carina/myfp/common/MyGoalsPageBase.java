@@ -13,9 +13,7 @@ public abstract class MyGoalsPageBase extends AbstractPage {
 
     public abstract String getAlertText();
 
-    public abstract boolean isEnteredWeightPresent(String weight);
-
-    public abstract AbstractPage setWeightButton(MyGoalsEnum weight);
+    public abstract AbstractPage openWeightMenu(MyGoalsEnum weight);
 
     public abstract MyGoalsPageBase setCurrentWeight(double randomWeight);
 
@@ -23,8 +21,8 @@ public abstract class MyGoalsPageBase extends AbstractPage {
 
     public abstract void clickOnButtonByName(String buttons);
 
-    public abstract double getCurrentWeight(String value);
+    public abstract double getCurrentWeight();
 
-    public abstract double getGoalWeight(String value);
+    public abstract double getGoalWeight();
 
     }

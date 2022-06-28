@@ -53,14 +53,9 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
         return alertTitleText.getText();
     }
 
-    @Override
-    public boolean isEnteredWeightPresent(String weight) {
-        return itemByName.format(weight).isElementPresent(THREE_SECONDS);
-    }
 
-// * openWeightMenu
     @Override
-    public MyGoalsPageBase setWeightButton(MyGoalsEnum weight) {
+    public MyGoalsPageBase openWeightMenu(MyGoalsEnum weight) {
         itemByName.format(weight.getName()).click(THREE_SECONDS);
         return initPage(getDriver(), MyGoalsPageBase.class);
     }
@@ -92,14 +87,14 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
     }
 
     @Override
-    public double getCurrentWeight(String value) {
+    public double getCurrentWeight() {
         String parseValue = valueWeight.format(MyGoalsEnum.CURRENT_WEIGHT.getName()).getText();
         String[] parseNewValue = parseValue.split("\\D+");
         return Double.parseDouble(String.join(".", parseNewValue));
     }
 
     @Override
-    public double getGoalWeight(String value) {
+    public double getGoalWeight() {
         String parseValue = valueWeight.format(MyGoalsEnum.GOAL_WEIGHT.getName()).getText();
         String[] parseNewValue = parseValue.split("\\D+");
         return Double.parseDouble(String.join(".", parseNewValue));
