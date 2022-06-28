@@ -3,6 +3,7 @@ package com.qaprosoft.carina.myfp.android;
 import com.qaprosoft.carina.core.foundation.utils.factory.DeviceType;
 import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.common.DiaryPageBase;
 import com.qaprosoft.carina.myfp.common.UserPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
@@ -67,7 +68,7 @@ public class UserPage extends UserPageBase implements IMobileUtils, TimeConstant
     public void pageIsLoaded() {
         waitUntil(ExpectedConditions.visibilityOf(burgerMenuButton.getElement()), TEN_TIMEOUT);
         waitUntil(ExpectedConditions.or(ExpectedConditions.visibilityOf(notificationIcon.getElement()),
-                ExpectedConditions.visibilityOf(scrollView.getElement())), ONE_MINUTE_TIMEOUT);
+                ExpectedConditions.visibilityOf(scrollView.getElement())), FIFTEEN_SECONDS);
         while (featureHighlight.isElementPresent(THREE_SECONDS)) {
             featureHighlight.click(THREE_SECONDS);
         }
@@ -111,8 +112,8 @@ public class UserPage extends UserPageBase implements IMobileUtils, TimeConstant
     }
 
     @Override
-    public DiaryPageBase clickOnTab(UserPageEnum dairy) {
+    public AbstractPage clickOnMenu(UserPageEnum dairy) {
         itemTabText.format(dairy.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), DiaryPageBase.class);
+        return initPage(getDriver(), dairy.getPageClass());
     }
 }

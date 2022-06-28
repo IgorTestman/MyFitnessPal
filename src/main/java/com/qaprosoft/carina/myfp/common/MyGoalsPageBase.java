@@ -13,7 +13,7 @@ public abstract class MyGoalsPageBase extends AbstractPage {
 
     public abstract String getAlertText();
 
-    public abstract AbstractPage openWeightMenu(MyGoalsEnum weight);
+    public abstract MyGoalsPageBase openWeightMenu(MyGoalsEnum weight);
 
     public abstract MyGoalsPageBase setCurrentWeight(double randomWeight);
 

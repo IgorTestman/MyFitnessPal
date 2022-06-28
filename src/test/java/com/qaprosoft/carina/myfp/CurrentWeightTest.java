@@ -9,10 +9,8 @@ import com.qaprosoft.carina.myfp.utils.enums.*;
 import com.qaprosoft.carina.myfp.utils.services.Authorization;
 import com.qaprosoft.carina.myfp.utils.services.SignUp;
 import com.zebrunner.agent.core.annotation.TestLabel;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
 import java.util.Random;
 
 
@@ -20,36 +18,10 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
     private static Authorization authorization;
     private static SignUp signUp;
 
-    @Test()
-    @MethodOwner(owner = "IgorB")
-    @TestLabel(name = "Five Test", value = {"mobile", "regression"})
-    public void currentGoalWeightInLbTest() {
-
-        SoftAssert softAssert = new SoftAssert();
-
-        int randomWeight = new Random().nextInt(889)+122;
-        authorization = new Authorization(getDriver());
-        UserPageBase userPage = authorization.logIn();
-        MePageBase mePage = (MePageBase) userPage.clickOnTab(UserPageEnum.ME);
-        SettingsPageBase settingsPage = mePage.followToSettingsPage();
-        MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.openPageByName(Settings.MY_GOALS);
-        myGoalsPage.setCurrentWeight(randomWeight);
-        myGoalsPage.setCurrentWeight(MAX_CURRENT_WEIGHT_IN_LB);
-        softAssert.assertEquals(myGoalsPage.getAlertTitle(), ALERT_MESSAGE, "Alert message isn't" +
-                " present");
-        myGoalsPage.clickOnButtonByName(DISMISS);
-        myGoalsPage.setCurrentWeight(CURRENT_WEIGHT_IN_LB);
-        softAssert.assertEquals(myGoalsPage.getCurrentWeight(), CURRENT_WEIGHT_IN_LB,
-                "Current weight is incorrect");
-        myGoalsPage.setGoalWeight(MAX_GOAL_WEIGHT_IN_LB);
-        softAssert.assertEquals(myGoalsPage.getGoalWeight(), MAX_WEIGHT_IN_LB, "Max weight is incorrect");
-
-        softAssert.assertAll();
-    }
 
     @Test()
     @MethodOwner(owner = "IgorB")
-    @TestLabel(name = "Six test'", value = {"mobile", "regression"})
+    @TestLabel(name = "Five test'", value = {"mobile", "regression"})
     public void currentWeightFromSighUpPageTest() {
         SoftAssert softAssert = new SoftAssert();
 
@@ -67,7 +39,7 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
 
     @Test()
     @MethodOwner(owner = "IgorB")
-    @TestLabel(name = "Seven Test", value = {"mobile", "regression"})
+    @TestLabel(name = "Six Test", value = {"mobile", "regression"})
     public void currentGoalWeightInKgTest() {
 
         SoftAssert softAssert = new SoftAssert();
@@ -75,9 +47,9 @@ public class CurrentWeightTest implements IAbstractTest, IMobileUtils, TextConst
         double randomWeight = new Random().nextInt(423) + 30.0;
         authorization = new Authorization(getDriver());
         UserPageBase userPage = authorization.logIn();
-        MePageBase mePage = (MePageBase) userPage.clickOnTab(UserPageEnum.ME);
+        MePageBase mePage = (MePageBase) userPage.clickOnMenu(UserPageEnum.ME);
         SettingsPageBase settingsPage = mePage.followToSettingsPage();
-        MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.openPageByName(Settings.MY_GOALS);
+        MyGoalsPageBase myGoalsPage = (MyGoalsPageBase) settingsPage.openPageByName(SettingsEnum.MY_GOALS);
         myGoalsPage.setCurrentWeight(randomWeight);
         myGoalsPage.setCurrentWeight(MAX_CURRENT_WEIGHT_IN_KG);
         softAssert.assertEquals(myGoalsPage.getAlertTitle(), ALERT_MESSAGE, "Alert message isn't" +

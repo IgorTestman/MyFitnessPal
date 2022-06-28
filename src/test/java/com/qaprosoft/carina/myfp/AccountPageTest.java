@@ -11,6 +11,7 @@ import com.qaprosoft.carina.myfp.utils.enums.UserPageEnum;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import com.qaprosoft.carina.myfp.utils.services.Authorization;
 import com.zebrunner.agent.core.annotation.TestLabel;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,7 +20,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
     private static Authorization authorization;
     private final String SALAD_ASIAN = "Salad asian";
     private final String SALAD = "Salad";
-    private final String EXPECTED_TIME = "9:15 PM";
+    private final String EXPECTED_TIME = "9:15 AM";
     private final String NO_TIME = "No Time";
 
     @Test()
@@ -30,7 +31,7 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
 
         authorization = new Authorization(getDriver());
         UserPageBase userPage = authorization.logIn();
-        DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnTab(UserPageEnum.DIARY);
+        DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnMenu(UserPageEnum.DIARY);
         MealPageBase mealPage = diaryPage.clickOnAddFoodButton(DiaryEnum.BREAKFAST);
         mealPage.addFood(SALAD_ASIAN);
         AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
@@ -50,15 +51,21 @@ public class AccountPageTest implements IAbstractTest, IMobileUtils, TextConstan
 
         authorization = new Authorization(getDriver());
         UserPageBase userPage = authorization.logIn();
-        DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnTab(UserPageEnum.DIARY);
+        DiaryPageBase diaryPage = (DiaryPageBase) userPage.clickOnMenu(UserPageEnum.DIARY);
+        MealPageBase mealPage = diaryPage.clickOnAddFoodButton(DiaryEnum.BREAKFAST);
+        mealPage.addFood(SALAD_ASIAN);
+        AddFoodPageBase addFoodPage = mealPage.clickOnChosenFood();
+        addFoodPage.clickOnPopUp();
+        diaryPage = addFoodPage.clickOnSaveButton();
         DiarySettingsPageBase diarySettings = diaryPage.clickOnOptions(ViewOptionsDiaryEnum.DIARY_SETTINGS);
         diarySettings.clickOnTimeStampsCheckbox();
-        softAssert.assertTrue(diarySettings.checkBoxChecked(true), "Checkbox isn't checked");
+        //Assert.assertTrue(diarySettings.checkBoxChecked(true), "Checkbox isn't checked");
         diaryPage = diarySettings.clickOnBackButton();
-        softAssert.assertEquals(diaryPage.getTimeStampsText(), NO_TIME, "Time stamp isn't present");
+        Assert.assertEquals(diaryPage.getTimeStampsText(), NO_TIME, "Time stamp isn't present");
         diaryPage.clickOnTimeStamp();
         diaryPage.selectEditTimeStamp(TimeStampEnum.EDIT_TIME);
-        softAssert.assertEquals(diaryPage.getAddedTimeStampsText(), EXPECTED_TIME, "Time is wrong");
+        diaryPage.enterTime();
+        Assert.assertEquals(diaryPage.getAddedTimeStampsText(), EXPECTED_TIME, "Time is wrong");
         softAssert.assertAll();
     }
 }

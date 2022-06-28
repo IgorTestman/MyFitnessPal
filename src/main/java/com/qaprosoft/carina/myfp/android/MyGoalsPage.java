@@ -75,7 +75,7 @@ public class MyGoalsPage extends MyGoalsPageBase implements TimeConstants, IMobi
         itemByName.format(MyGoalsEnum.GOAL_WEIGHT.getName()).click(THREE_SECONDS);
         clickOnButtonByName(YES);
         ExtendedWebElement maxValue = inputNumberPickerField.format(value);
-        swipe(maxValue, Direction.UP, SIXTY_SWIPES, FAST_SWIPES);
+        swipe(maxValue, Direction.UP, NINE_HUNDRED, FAST_SWIPES);
         clickOnButtonByName(SET);
         return initPage(getDriver(), MyGoalsPageBase.class);
     }

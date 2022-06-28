@@ -24,14 +24,24 @@ public class AddFoodPage extends AddFoodPageBase implements TimeConstants, IMobi
     @FindBy(id = "com.myfitnesspal.android:id/menu_action_item")
     private ExtendedWebElement saveButton;
 
+    @FindBy(id = "netcarbs_tooltip_title")
+    private ExtendedWebElement toolTitle;
+
     @Override
     public void clickOnPopUp() {
         toolTipDescription.click(FIVE_SECONDS);
     }
 
     @Override
+    public void clickOnToolTitle() {
+        toolTipDescription.clickIfPresent(THREE_SECONDS);
+
+    }
+
+
+    @Override
     public DiaryPageBase clickOnSaveButton() {
-        saveButton.click(THREE_SECONDS);
+        saveButton.click(SEVEN_SECONDS);
         waitUntil(ExpectedConditions.visibilityOf(saveButton.getElement()), TEN_TIMEOUT);
         return initPage(getDriver(), DiaryPageBase.class);
     }

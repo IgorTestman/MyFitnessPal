@@ -6,10 +6,11 @@ import com.qaprosoft.carina.core.foundation.utils.mobile.IMobileUtils;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.common.CreateAccountPageBase;
+import com.qaprosoft.carina.myfp.common.MyGoalsPageBase;
 import com.qaprosoft.carina.myfp.common.WeeklyGoalPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
-import com.qaprosoft.carina.myfp.utils.enums.YouPage;
+import com.qaprosoft.carina.myfp.utils.enums.YouPageEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -29,7 +30,7 @@ public class WeeklyGoalPage extends WeeklyGoalPageBase implements TimeConstants,
     @FindBy(xpath = "//android.widget.TextView[@text='%s']")
     private ExtendedWebElement getItemByChosenText;
 
-    @FindBy(id = "com.myfitnesspal.android:id/goal_weight")
+    @FindBy(id = "com.myfitnesspal.android:id/inputGoalWeight")
     private ExtendedWebElement goaLWeightDropdown;
 
     @FindBy(id = "com.myfitnesspal.android:id/entry_one")
@@ -41,7 +42,7 @@ public class WeeklyGoalPage extends WeeklyGoalPageBase implements TimeConstants,
     @FindBy(xpath = "//android.widget.RadioButton[@text='%s']")
     private ExtendedWebElement radioButtonByText;
 
-    @FindBy(id = "com.myfitnesspal.android:id/nextButton")
+    @FindBy(id = "com.myfitnesspal.android:id/buttonNext")
     private ExtendedWebElement nextButton;
 
     @FindBy(id = "com.myfitnesspal.android:id/container")
@@ -54,10 +55,10 @@ public class WeeklyGoalPage extends WeeklyGoalPageBase implements TimeConstants,
     }
 
     @Override
-    public AbstractPage selectWeightUnitFromDropdown(YouPage weight) {
+    public WeeklyGoalPageBase selectWeightUnitFromDropdown(YouPageEnum weight) {
         unitsDropdown.click();
         itemByText.format(weight.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), weight.getPageClass());
+        return initPage(getDriver(), WeeklyGoalPageBase.class);
     }
 
     @Override
@@ -72,9 +73,9 @@ public class WeeklyGoalPage extends WeeklyGoalPageBase implements TimeConstants,
     }
 
     @Override
-    public AbstractPage switchToWeeklyGoal(YouPage weeklyGoal) {
+    public WeeklyGoalPageBase switchToWeeklyGoal(YouPageEnum weeklyGoal) {
         radioButtonByText.format(weeklyGoal.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), weeklyGoal.getPageClass());
+        return initPage(getDriver(), WeeklyGoalPageBase.class);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class WeeklyGoalPage extends WeeklyGoalPageBase implements TimeConstants,
         return initPage(getDriver(), CreateAccountPageBase.class);
     }
     @Override
-    public String isInputWeightPresent() {
+    public String getInputWeightText() {
         return inputWeight.getText();
     }
 }

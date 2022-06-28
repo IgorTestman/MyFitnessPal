@@ -8,7 +8,7 @@ import com.qaprosoft.carina.myfp.common.*;
 import com.qaprosoft.carina.myfp.utils.enums.ActivityLevelEnum;
 import com.qaprosoft.carina.myfp.utils.enums.GoalsEnum;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
-import com.qaprosoft.carina.myfp.utils.enums.YouPage;
+import com.qaprosoft.carina.myfp.utils.enums.YouPageEnum;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -59,18 +59,18 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         activityLevelPage.clickOnNextButton();
 
         //*TC #3 (Verify ability to switch Gender)
-        youPage.clickOnGenderButton(YouPage.MALE);
-        Assert.assertTrue(youPage.isGenderSelected(YouPage.MALE.getName()), "Male gender isn't selected");
-        youPage.clickOnGenderButton(YouPage.FEMALE);
-        Assert.assertTrue(youPage.isGenderSelected(YouPage.FEMALE.getName()), "Female gender isn't selected");
+        youPage.clickOnGenderButton(YouPageEnum.MALE);
+        Assert.assertTrue(youPage.isGenderSelected(YouPageEnum.MALE.getName()), "Male gender isn't selected");
+        youPage.clickOnGenderButton(YouPageEnum.FEMALE);
+        Assert.assertTrue(youPage.isGenderSelected(YouPageEnum.FEMALE.getName()), "Female gender isn't selected");
 
         //*TC #4 (Verify valid age values)
         youPage.typeAge("64");
         Assert.assertEquals(youPage.getInputAge(), "64", "Age is incorrect");
 
         //*TC #5 (Verify location address via dropdown)
-        youPage.selectCountryFromDropdown(YouPage.ZAMBIA);
-        Assert.assertTrue(youPage.isCountrySelected(YouPage.ZAMBIA.getName()), "Country is not selected");
+        youPage.selectCountryFromDropdown(YouPageEnum.ZAMBIA);
+        Assert.assertTrue(youPage.isCountrySelected(YouPageEnum.ZAMBIA.getName()), "Country is not selected");
         youPage.clickOnNextButton();
 
         //*TC #6 (Verify input valid values on Height)
@@ -80,13 +80,13 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         Assert.assertEquals(youPage.getInputFirstHeight(), "5", "First height is wrong");
         youPage.typeSecondHeight("6");
         Assert.assertEquals(youPage.isInputSecondHeightPresent(), "6", "Second height is wrong");
-        youPage.selectHeightUnitFromDropdown(YouPage.FEET_INCHES);
-        Assert.assertTrue(youPage.isHeightUnitSelected(YouPage.FEET_INCHES.getName()),
+        youPage.selectHeightUnitFromDropdown(YouPageEnum.FEET_INCHES);
+        Assert.assertTrue(youPage.isHeightUnitSelected(YouPageEnum.FEET_INCHES.getName()),
                 "Feet Inches units is not selected");
 
         //* 6.2 (Verify input values in Centimeters)
-        youPage.selectHeightUnitFromDropdown(YouPage.CENTIMETERS);
-        Assert.assertTrue(youPage.isHeightUnitSelected(YouPage.CENTIMETERS.getName()),
+        youPage.selectHeightUnitFromDropdown(YouPageEnum.CENTIMETERS);
+        Assert.assertTrue(youPage.isHeightUnitSelected(YouPageEnum.CENTIMETERS.getName()),
                 "Units in centimeters are not selected");
         youPage.typeHeightInCentimeters("200");
         Assert.assertEquals(youPage.getInputFirstHeight(),
@@ -100,13 +100,13 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         ///////////////* parsing String to int...
         Assert.assertEquals(youPage.getInputValue("30 lbs"), 30, "Weight is incorrect");
         youPage.clickOnWeightButton();
-        youPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
-        Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
+        youPage.selectWeightUnitFromDropdown(YouPageEnum.POUNDS);
+        Assert.assertTrue(youPage.isWeightUnitSelected(YouPageEnum.POUNDS.getName()),
                 "Weight Pounds unit is not selected");
 
         //* 7.2 (Verify input values in 'Kilograms')
-        youPage.selectWeightUnitFromDropdown(YouPage.KILOGRAMS);
-        Assert.assertTrue(youPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
+        youPage.selectWeightUnitFromDropdown(YouPageEnum.KILOGRAMS);
+        Assert.assertTrue(youPage.isWeightUnitSelected(YouPageEnum.KILOGRAMS.getName()),
                 "Weight unit is not selected");
         youPage.typeWeight(400.0);
         Assert.assertEquals(youPage.getInputValue("400 kg"), 400, "Weight is incorrect");
@@ -118,24 +118,24 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         weeklyGoalPage.typeWeight("400");
         Assert.assertEquals(weeklyGoalPage.getInputWeightText(),
                 "400", "Weight value is incorrect");
-        weeklyGoalPage.selectWeightUnitFromDropdown(YouPage.KILOGRAMS);
-        Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.KILOGRAMS.getName()),
+        weeklyGoalPage.selectWeightUnitFromDropdown(YouPageEnum.KILOGRAMS);
+        Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPageEnum.KILOGRAMS.getName()),
                 "Weekly Goal Weight in Kilogram unit is not selected");
         weeklyGoalPage.clickOnSetButton();
 
         //*TC #9.1 (Verify the ability to toggle the Weekly goal 'Kilograms')
-        weeklyGoalPage.switchToWeeklyGoal(YouPage.LOSE_ONE_KG_PER_WEEK);
-        Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected(YouPage.LOSE_ONE_KG_PER_WEEK.getName()),
+        weeklyGoalPage.switchToWeeklyGoal(YouPageEnum.LOSE_ONE_KG_PER_WEEK);
+        Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected(YouPageEnum.LOSE_ONE_KG_PER_WEEK.getName()),
                 "Weekly Goal Weight in kilogram is not switched");
-        weeklyGoalPage.switchToWeeklyGoal(YouPage.LOSE_ONE_POINT_TWENTY_FIVE_KG_PER_WEEK);
+        weeklyGoalPage.switchToWeeklyGoal(YouPageEnum.LOSE_ONE_POINT_TWENTY_FIVE_KG_PER_WEEK);
         Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected
-                        (YouPage.LOSE_ONE_POINT_TWENTY_FIVE_KG_PER_WEEK.getName()),
+                        (YouPageEnum.LOSE_ONE_POINT_TWENTY_FIVE_KG_PER_WEEK.getName()),
                 "Weekly Goal Weight in Kilogram is not switched");
 
         //*TC #8.2 (Verify input values in 'Pounds')
         weeklyGoalPage.clickToOpenDropdownWeight();
-        weeklyGoalPage.selectWeightUnitFromDropdown(YouPage.POUNDS);
-        Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPage.POUNDS.getName()),
+        weeklyGoalPage.selectWeightUnitFromDropdown(YouPageEnum.POUNDS);
+        Assert.assertTrue(weeklyGoalPage.isWeightUnitSelected(YouPageEnum.POUNDS.getName()),
                 "Weekly Goal Weight in Pounds unit is not selected");
         weeklyGoalPage.typeWeightAgain("170");
         Assert.assertEquals(weeklyGoalPage.getInputWeightText(),
@@ -143,12 +143,12 @@ public class ValidationElementsTest implements IAbstractTest, IMobileUtils, Text
         weeklyGoalPage.clickOnSetButton();
 
         //*TC #9.2 (Verify the ability to toggle the Weekly goal 'Pounds')
-        weeklyGoalPage.switchToWeeklyGoal(YouPage.LOSE_ZERO_POINT_FIVE_LBS_PER_WEEK);
-        Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected(YouPage.LOSE_ZERO_POINT_FIVE_LBS_PER_WEEK.getName()),
+        weeklyGoalPage.switchToWeeklyGoal(YouPageEnum.LOSE_ZERO_POINT_FIVE_LBS_PER_WEEK);
+        Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected(YouPageEnum.LOSE_ZERO_POINT_FIVE_LBS_PER_WEEK.getName()),
                 "Weekly Goal Weight in Pounds is not switched");
-        weeklyGoalPage.switchToWeeklyGoal(YouPage.LOSE_ONE_POINT_FIVE_LBS_PER_WEEK);
+        weeklyGoalPage.switchToWeeklyGoal(YouPageEnum.LOSE_ONE_POINT_FIVE_LBS_PER_WEEK);
         Assert.assertTrue(weeklyGoalPage.isWeeklyGoalSelected
-                        (YouPage.LOSE_ONE_POINT_FIVE_LBS_PER_WEEK.getName()),
+                        (YouPageEnum.LOSE_ONE_POINT_FIVE_LBS_PER_WEEK.getName()),
                 "Weekly Goal Weight in Pounds is not switched");
 
 

@@ -7,6 +7,7 @@ import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.common.DiarySettingsPageBase;
 import com.qaprosoft.carina.myfp.common.MealPageBase;
 import com.qaprosoft.carina.myfp.common.DiaryPageBase;
+import com.qaprosoft.carina.myfp.common.MyGoalsPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
@@ -15,7 +16,6 @@ import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import static com.qaprosoft.carina.myfp.utils.constants.TextConstants.NINE_HOUR;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = DiaryPageBase.class)
 public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUtils, TextConstants {
@@ -167,13 +167,12 @@ public class DiaryPage extends DiaryPageBase implements TimeConstants, IMobileUt
     }
 
     @Override
-    public AbstractPage selectEditTimeStamp(TimeStampEnum timeStamp) {
+    public DiaryPageBase selectEditTimeStamp(TimeStampEnum timeStamp) {
         editTime.format(timeStamp.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), timeStamp.getPageClass());
+        return initPage(getDriver(), DiaryPageBase.class);
 
     }
 
-    @Override
     public void enterTime() {
         keyBoardButton.click();
         selectHours.click();

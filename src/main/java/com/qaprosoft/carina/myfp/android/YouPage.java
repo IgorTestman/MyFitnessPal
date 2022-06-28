@@ -71,10 +71,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     private ExtendedWebElement errorMessage;
 
     @Override
-    public AbstractPage selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage country) {
+    public YouPageBase selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum country) {
         countryDropdown.click();
         selectCountry.format(country.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), country.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -83,9 +83,9 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public AbstractPage clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage gender) {
+    public YouPageBase clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum gender) {
         itemByGenderButton.format(gender.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), gender.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -136,10 +136,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public AbstractPage selectHeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage height) {
+    public YouPageBase selectHeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum height) {
         unitsDropdown.click();
         itemByText.format(height.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), height.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -148,10 +148,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public AbstractPage selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage weight) {
+    public YouPageBase selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum weight) {
         unitsDropdown.click();
         itemByText.format(weight.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), weight.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -199,13 +199,13 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
 
     @Override
     public void inputValues() {
-        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage.MALE);
-        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage.FEMALE);
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.MALE);
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.FEMALE);
         typeAge("64");
-        selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage.ZAMBIA);
+        selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.ZAMBIA);
         clickOnNextButton();
         clickOnWeightButton();
-        selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage.KILOGRAMS);
+        selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.KILOGRAMS);
     }
 
     @Override

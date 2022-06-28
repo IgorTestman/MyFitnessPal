@@ -3,7 +3,7 @@ package com.qaprosoft.carina.myfp.common;
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
 import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
-import com.qaprosoft.carina.myfp.utils.enums.TimeStamp;
+import com.qaprosoft.carina.myfp.utils.enums.TimeStampEnum;
 import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
 
@@ -23,12 +23,6 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract boolean isMealMacrosPresent();
 
-    public abstract boolean isNameOfAddedFoodPresent();
-
-    public abstract boolean isCaloriesOfAddedFoodPresent();
-
-    public abstract boolean isDetailsOfAddedFoodPresent();
-
     public abstract String  getAddedMealText(String food);
 
     public abstract String getAddedFoodNameText();
@@ -41,11 +35,11 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract void clickOnTimeStamp();
 
-    public abstract AbstractPage selectEditTimeStamp(TimeStamp timeStamp);
+    public abstract DiaryPageBase selectEditTimeStamp(TimeStampEnum timeStamp);
 
-    public abstract void typeHours(String hours);
+    public abstract void typeHours(int hours);
 
-    public abstract void typeMinutes(String hours);
+    public abstract void typeMinutes(int hours);
 
     public abstract void enterTime();
 
@@ -55,6 +49,14 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract MealPageBase clickOnAddFoodButton(DiaryEnum diary);
 
-    public abstract void selectTimeFormat(String format);
+    public abstract void selectTimeFormat();
+
+    public abstract String getNameOfAddedFood();
+
+    public abstract String getCaloriesOfAddedFood();
+
+    public abstract String getDetailsOfAddedFood();
 
     }
+
+

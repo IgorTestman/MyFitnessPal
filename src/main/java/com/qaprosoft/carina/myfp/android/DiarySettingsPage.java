@@ -18,7 +18,7 @@ public class DiarySettingsPage extends DiarySettingsPageBase implements TimeCons
     @FindBy(id = "com.myfitnesspal.android:id/settings_food_timestamps")
     private ExtendedWebElement foodTimeStamps;
 
-    @FindBy(xpath = "//android.widget.LinearLayout/android.view.ViewGroup[7]/android.widget.CheckBox")
+    @FindBy(id = "com.myfitnesspal.android:id/settings_food_timestamps")
     private ExtendedWebElement checkBox;
 
     @FindBy(className = "android.widget.ImageButton")
@@ -41,9 +41,9 @@ public class DiarySettingsPage extends DiarySettingsPageBase implements TimeCons
     @Override
     public boolean checkBoxChecked(boolean checked) {
         if (checked) {
-            checkBox.check();
-        } else {
             checkBox.uncheck();
+        } else {
+            checkBox.check();
         }
         return checkBox.isChecked();
     }
