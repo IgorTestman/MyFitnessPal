@@ -2,6 +2,9 @@ package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
 import com.qaprosoft.carina.myfp.utils.constants.TextConstants;
+import com.qaprosoft.carina.myfp.utils.enums.DiaryEnum;
+import com.qaprosoft.carina.myfp.utils.enums.TimeStampEnum;
+import com.qaprosoft.carina.myfp.utils.enums.ViewOptionsDiaryEnum;
 import org.openqa.selenium.WebDriver;
 
 public abstract class DiaryPageBase extends AbstractPage implements TextConstants {
@@ -16,26 +19,44 @@ public abstract class DiaryPageBase extends AbstractPage implements TextConstant
 
     public abstract boolean isMealTimePresent(String meal);
 
-    public abstract String isCaloriesOfMealTimePresent();
+    public abstract boolean isAddedFoodPresent();
 
-    public abstract String isMealMacrosPresent();
+    public abstract boolean isMealMacrosPresent();
 
-    public abstract String isNameOfAddedFoodPresent();
+    public abstract String  getAddedMealText(String food);
 
-    public abstract String isCaloriesOfAddedFoodPresent();
+    public abstract String getAddedFoodNameText();
 
-    public abstract String isDetailsOfAddedFoodPresent();
+    public abstract String getAddedFoodCaloriesText();
 
-    public abstract FoodPageBase clickOnAddFoodButton();
+    public abstract String getAddedFoodDetailsText();
 
-    public abstract String getAddedMealName();
+    public abstract DiarySettingsPageBase clickOnOptions(ViewOptionsDiaryEnum options);
 
-    public abstract boolean getAddedFoodName();
+    public abstract void clickOnTimeStamp();
 
-    public abstract boolean getAddedFoodCalories();
+    public abstract DiaryPageBase selectEditTimeStamp(TimeStampEnum timeStamp);
 
-    public abstract boolean getAddedFoodDetails();
+    public abstract void typeHours(int hours);
 
-    public abstract boolean getMeal();
+    public abstract void typeMinutes(int hours);
 
-}
+    public abstract void enterTime();
+
+    public abstract String getAddedTimeStampsText();
+
+    public abstract String getTimeStampsText();
+
+    public abstract MealPageBase clickOnAddFoodButton(DiaryEnum diary);
+
+    public abstract void selectTimeFormat();
+
+    public abstract String getNameOfAddedFood();
+
+    public abstract String getCaloriesOfAddedFood();
+
+    public abstract String getDetailsOfAddedFood();
+
+    }
+
+

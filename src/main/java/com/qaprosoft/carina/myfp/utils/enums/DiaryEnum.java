@@ -1,25 +1,23 @@
 package com.qaprosoft.carina.myfp.utils.enums;
 
-import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.myfp.common.DiaryPageBase;
-
 public enum DiaryEnum {
-    BREAKFAST("Breakfast", DiaryPageBase.class);
-    private String name;
-    private Class<? extends AbstractPage> pageClass;
+    BREAKFAST("Breakfast"),
+    LUNCH ("LUNCH"),
+    DINNER ("Dinner"),
+    SNACKS ("Snacks"),
+    EXERCISE ("Exercise"),
+    WATER ("Water");
 
-    DiaryEnum(String name, Class<? extends AbstractPage> pageClass) {
+    private String name;
+
+    DiaryEnum(String name) {
         this.name = name;
-        this.pageClass = pageClass;
     }
 
     public String getName() {
         return name;
     }
 
-    public Class<? extends AbstractPage> getPageClass() {
-        return this.pageClass;
-    }
 }
 
 

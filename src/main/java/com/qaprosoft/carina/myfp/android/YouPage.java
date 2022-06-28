@@ -46,6 +46,9 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     @FindBy(id = "com.myfitnesspal.android:id/entry_one")
     private ExtendedWebElement entryFirstValue;
 
+    @FindBy(id = "com.myfitnesspal.android:id/current_weight")
+    private ExtendedWebElement enteredCurrentWeight;
+
     @FindBy(id = "com.myfitnesspal.android:id/entry_two")
     private ExtendedWebElement entrySecondValue;
 
@@ -64,11 +67,14 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     @FindBy(xpath = "//android.widget.ImageButton[@index='0']")
     private ExtendedWebElement backButton;
 
+    @FindBy(xpath = "//android.widget.TextView[@text='Please enter a valid weight']")
+    private ExtendedWebElement errorMessage;
+
     @Override
-    public AbstractPage selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage country) {
+    public YouPageBase selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum country) {
         countryDropdown.click();
         selectCountry.format(country.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), country.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -77,9 +83,9 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public AbstractPage clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPage gender) {
+    public YouPageBase clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum gender) {
         itemByGenderButton.format(gender.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), gender.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -108,7 +114,7 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeFirstHeight(String  firstValue) {
+    public void typeFirstHeight(String firstValue) {
         entryFirstValue.type(String.valueOf(firstValue));
     }
 
@@ -124,15 +130,16 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public void typeWeight(String value) {
+    public void typeWeight(double value) {
         entryFirstValue.type(String.valueOf(value));
+        clickOnSetButton();
     }
 
     @Override
-    public AbstractPage selectHeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage height) {
+    public YouPageBase selectHeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum height) {
         unitsDropdown.click();
         itemByText.format(height.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), height.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -141,10 +148,10 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public AbstractPage selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPage weight) {
+    public YouPageBase selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum weight) {
         unitsDropdown.click();
         itemByText.format(weight.getName()).click(THREE_SECONDS);
-        return initPage(getDriver(), weight.getPageClass());
+        return initPage(getDriver(), YouPageBase.class);
     }
 
     @Override
@@ -169,23 +176,41 @@ public class YouPage extends YouPageBase implements TimeConstants, IMobileUtils,
     }
 
     @Override
-    public String isInputAgePresent() {
+    public String getInputAge() {
         return birthDateField.getText();
     }
 
     @Override
-    public String isInputFirstHeightPresent() {
+    public String getInputFirstHeight() {
         return entryFirstValue.getText();
     }
 
     @Override
-    public String isInputValuePresent() {
-        return entryFirstValue.getText();
-    }
+    public int getInputValue(String value) {
+        String newString = enteredCurrentWeight.format(value).getText();
+        String[] newString2 = newString.split("\\D+");
+        return Integer.parseInt(String.join("", newString2));
+   }
 
     @Override
     public String isInputSecondHeightPresent() {
         return entrySecondValue.getText();
+    }
+
+    @Override
+    public void inputValues() {
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.MALE);
+        clickOnGenderButton(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.FEMALE);
+        typeAge("64");
+        selectCountryFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.ZAMBIA);
+        clickOnNextButton();
+        clickOnWeightButton();
+        selectWeightUnitFromDropdown(com.qaprosoft.carina.myfp.utils.enums.YouPageEnum.KILOGRAMS);
+    }
+
+    @Override
+    public String errorMessageIsPresent() {
+        return errorMessage.getText();
     }
 
 }

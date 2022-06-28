@@ -1,7 +1,7 @@
 package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.myfp.utils.enums.YouPage;
+import com.qaprosoft.carina.myfp.utils.enums.YouPageEnum;
 import org.openqa.selenium.WebDriver;
 
 public abstract class WeeklyGoalPageBase extends AbstractPage {
@@ -10,7 +10,7 @@ public abstract class WeeklyGoalPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract AbstractPage selectWeightUnitFromDropdown(YouPage weight);
+    public abstract WeeklyGoalPageBase selectWeightUnitFromDropdown(YouPageEnum weight);
 
     public abstract void typeWeight(String value);
 
@@ -18,7 +18,7 @@ public abstract class WeeklyGoalPageBase extends AbstractPage {
 
     public abstract void clickOnSetButton();
 
-    public abstract AbstractPage switchToWeeklyGoal(YouPage weeklyGoal);
+    public abstract WeeklyGoalPageBase switchToWeeklyGoal(YouPageEnum weeklyGoal);
 
     public abstract boolean isWeeklyGoalSelected(String weeklyGoal);
 
@@ -28,6 +28,6 @@ public abstract class WeeklyGoalPageBase extends AbstractPage {
 
     public abstract CreateAccountPageBase followToCreateAccountPage();
 
-    public abstract String isInputWeightPresent();
+    public abstract String getInputWeightText();
 
 }

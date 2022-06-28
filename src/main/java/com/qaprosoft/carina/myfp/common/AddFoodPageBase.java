@@ -13,5 +13,8 @@ public abstract class AddFoodPageBase extends AbstractPage implements TextConsta
     public abstract DiaryPageBase clickOnSaveButton();
 
     public abstract void clickOnPopUp();
+
+    public abstract void clickOnToolTitle();
+
 }
 

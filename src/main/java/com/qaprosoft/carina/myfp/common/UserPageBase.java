@@ -29,6 +29,6 @@ public abstract class UserPageBase extends AbstractPage implements TextConstants
 
     public abstract void pageIsLoaded();
 
-    public abstract AbstractPage clickOnTab(UserPageEnum dairy);
+    public abstract AbstractPage clickOnMenu(UserPageEnum dairy);
 
 }

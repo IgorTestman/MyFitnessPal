@@ -1,7 +1,7 @@
 package com.qaprosoft.carina.myfp.common;
 
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.qaprosoft.carina.myfp.utils.enums.YouPage;
+import com.qaprosoft.carina.myfp.utils.enums.YouPageEnum;
 import org.openqa.selenium.WebDriver;
 
 public abstract class YouPageBase extends AbstractPage {
@@ -12,7 +12,7 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract boolean isGenderSelected(String gender);
 
-    public abstract AbstractPage clickOnGenderButton(YouPage country);
+    public abstract YouPageBase clickOnGenderButton(YouPageEnum country);
 
     public abstract boolean isCountrySelected(String country);
 
@@ -20,7 +20,7 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void clickOnNextButton();
 
-    public abstract AbstractPage selectCountryFromDropdown(YouPage country);
+    public abstract YouPageBase selectCountryFromDropdown(YouPageEnum country);
 
     public abstract void clickOnHeightButton();
 
@@ -32,13 +32,13 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void clickOnSetButton();
 
-    public abstract void typeWeight(String value);
+    public abstract void typeWeight(double value);
 
-    public abstract AbstractPage selectHeightUnitFromDropdown(YouPage height);
+    public abstract YouPageBase selectHeightUnitFromDropdown(YouPageEnum height);
 
     public abstract boolean isHeightUnitSelected(String unit);
 
-    public abstract AbstractPage selectWeightUnitFromDropdown(YouPage weight);
+    public abstract YouPageBase selectWeightUnitFromDropdown(YouPageEnum weight);
 
     public abstract boolean isWeightUnitSelected(String unit);
 
@@ -48,15 +48,19 @@ public abstract class YouPageBase extends AbstractPage {
 
     public abstract void typeHeightInCentimeters(String height);
 
-    public abstract String isInputAgePresent();
+    public abstract String getInputAge();
 
-    public abstract String isInputFirstHeightPresent();
+    public abstract String getInputFirstHeight();
 
     public abstract String isInputSecondHeightPresent();
 
-    public abstract String isInputValuePresent();
+    public abstract int getInputValue(String value);
 
-}
+    public abstract void inputValues();
+
+    public abstract String errorMessageIsPresent();
+
+    }
 
 
 

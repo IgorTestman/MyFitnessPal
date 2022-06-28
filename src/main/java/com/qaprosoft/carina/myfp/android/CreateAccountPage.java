@@ -15,7 +15,6 @@ public class CreateAccountPage extends CreateAccountPageBase implements IMobileU
         super(driver);
     }
 
-
     @FindBy(id = "com.myfitnesspal.android:id/emailEdit")
     private ExtendedWebElement emailField;
 
