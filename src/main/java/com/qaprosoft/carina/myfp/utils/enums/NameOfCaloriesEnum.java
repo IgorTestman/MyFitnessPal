@@ -1,13 +1,12 @@
 package com.qaprosoft.carina.myfp.utils.enums;
 
-public enum NameOfCalories {
+public enum NameOfCaloriesEnum {
     CARBS("Carbs"),
     PROTEIN ("Protein"),
     FAT("Fat");
 
     private String name;
-
-    NameOfCalories(String name) {
+    NameOfCaloriesEnum(String name) {
         this.name = name;
     }
 

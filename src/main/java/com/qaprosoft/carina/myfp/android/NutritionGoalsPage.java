@@ -6,7 +6,7 @@ import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebEleme
 import com.qaprosoft.carina.myfp.common.NutritionGoalsPageBase;
 import com.qaprosoft.carina.myfp.utils.constants.TimeConstants;
 import com.qaprosoft.carina.myfp.utils.enums.CalorieAndMacroGoalsEnum;
-import com.qaprosoft.carina.myfp.utils.enums.NameOfCalories;
+import com.qaprosoft.carina.myfp.utils.enums.NameOfCaloriesEnum;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -35,7 +35,6 @@ public class NutritionGoalsPage extends NutritionGoalsPageBase implements TimeCo
     @FindBy(xpath = "//android.widget.TextView[@content-desc='Done']")
     private ExtendedWebElement doneButton;
 
-
     @Override
     public NutritionGoalsPageBase openCalorieAndMacrosPage(CalorieAndMacroGoalsEnum calories) {
         itemByText.format(calories.getName()).click(THREE_SECONDS);
@@ -44,21 +43,21 @@ public class NutritionGoalsPage extends NutritionGoalsPageBase implements TimeCo
 
     @Override
     public int getCarbsWeight() {
-        String carbValue = currentCarb.format(NameOfCalories.CARBS.getName()).getText();
+        String carbValue = currentCarb.format(NameOfCaloriesEnum.CARBS.getName()).getText();
         String[] carb = carbValue.split("\\D+");
         return Integer.parseInt(String.join("", carb));
     }
 
     @Override
     public int getProteinWeight() {
-        String proteinValue = currentProtein.format(NameOfCalories.PROTEIN.getName()).getText();
+        String proteinValue = currentProtein.format(NameOfCaloriesEnum.PROTEIN.getName()).getText();
         String[] protein = proteinValue.split("\\D+");
         return Integer.parseInt(String.join("", protein));
     }
 
     @Override
     public int getFatWeight() {
-        String fatValue = currentFat.format(NameOfCalories.FAT.getName()).getText();
+        String fatValue = currentFat.format(NameOfCaloriesEnum.FAT.getName()).getText();
         String[] fat = fatValue.split("\\D+");
         return Integer.parseInt(String.join("", fat));
     }
@@ -73,9 +72,9 @@ public class NutritionGoalsPage extends NutritionGoalsPageBase implements TimeCo
         swipe(fatValue, IMobileUtils.Direction.UP, FIVE_SWIPES, SLOW_SWIPES);
         return initPage(getDriver(), NutritionGoalsPageBase.class);
     }
+
     @Override
     public void clickOnDoneButton() {
         doneButton.click(THREE_SECONDS);
-
     }
 }

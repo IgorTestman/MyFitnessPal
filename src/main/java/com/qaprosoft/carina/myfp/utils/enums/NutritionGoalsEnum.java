@@ -7,13 +7,10 @@ public enum NutritionGoalsEnum {
     ADDITIONAL_NUTRIENT_GOALS("Additional Nutrient Goals");
 
     private String name;
-
     NutritionGoalsEnum(String name) {
         this.name = name;
     }
-
     public String getName() {
         return name;
     }
-
 }

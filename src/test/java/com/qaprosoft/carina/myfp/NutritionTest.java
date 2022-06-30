@@ -18,11 +18,10 @@ import org.testng.asserts.SoftAssert;
 public class NutritionTest implements IAbstractTest, IMobileUtils, TextConstants {
     private static Authorization authorization;
 
-
     @Test()
     @MethodOwner(owner = "IgorB")
     @TestLabel(name = "Seven Test", value = {"mobile", "regression"})
-    public void nutritionTest() {
+    public void validationNutritionTest() {
 
         SoftAssert softAssert = new SoftAssert();
 

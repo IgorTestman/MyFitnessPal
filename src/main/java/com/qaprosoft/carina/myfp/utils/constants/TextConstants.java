@@ -39,5 +39,4 @@ public interface TextConstants {
     int CARBS_WEIGHT=686;
     int PROTEIN_WEIGHT= 229;
     int FAT_WEIGHT = 102 ;
-
 }

@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Carina Demo Tests - Mobile UI (Android)" verbose="1" parallel="methods">
+    <test name="Verify UI elements">
+        <parameter name="validationNutritionAndCalories" value="false"/>
+        <classes>
+            <class name="com.qaprosoft.carina.myfp.NutritionTest">
+            <methods>
+                <include name="validationNutritionTest"/>
+            </methods>
+        </class>
+    </classes>
+    </test>
+</suite>
