@@ -1,0 +1,42 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Carina Demo Tests - Mobile UI (Android)" verbose="1" parallel="methods">
+    <test name="Verify UI elements">
+        <parameter name="isPerform" value="false"/>
+        <classes>
+            <class name="com.qaprosoft.carina.myfp.ValidationElementsTest">
+            <methods>
+                <include name="validationGoalButtonsTest"/>
+            </methods>
+        </class>
+    </classes>
+    </test>
+    <test name="Verify Add food function">
+    <classes>
+            <class name="com.qaprosoft.carina.myfp.AccountPageTest">
+                <methods>
+                    <include name="diaryPageItemsFoodTest"/>
+                    <include name="timeStampsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify Added food">
+        <classes>
+            <class name="com.qaprosoft.carina.myfp.AddFoodTest">
+                <methods>
+                    <include name="diaryPageAddedFoodsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="Verify current and goal weight">
+    <classes>
+        <class name="com.qaprosoft.carina.myfp.CurrentWeightTest">
+            <methods>
+                <include name="currentGoalWeightTest"/>
+                <include name="currentGoalWeightInKgTest"/>
+            </methods>
+        </class>
+        </classes>
+    </test>
+</suite>
