@@ -3,9 +3,9 @@
     <test name="Verify UI elements">
         <parameter name="validationNutritionAndCalories" value="false"/>
         <classes>
-            <class name="com.qaprosoft.carina.myfp.NutritionTest">
+            <class name="com.qaprosoft.carina.myfp.MacronutrientsTest">
             <methods>
-                <include name="validationNutritionTest"/>
+                <include name="validationMacronutrientsTest"/>
             </methods>
         </class>
     </classes>
